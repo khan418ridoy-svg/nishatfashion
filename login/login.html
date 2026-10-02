@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login / Create Account — Nishat Fashion</title>
+
+    <meta name="description" content="Login or create your Nishat Fashion customer account.">
+
+    <link rel="stylesheet" href="./login.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+    <main class="login-wrapper">
+
+        <div class="login-container">
+
+
+            <!-- =========================================
+             LEFT SIDE
+        ========================================== -->
+
+            <section class="login-visual">
+
+                <div class="login-visual-overlay"></div>
+
+                <div class="login-visual-content">
+
+                    <a href="../index.html" class="login-logo">
+
+                        <img src="../asset/logo.png" alt="Nishat Fashion">
+
+                    </a>
+
+
+                    <span class="login-eyebrow">
+                        NISHAT FASHION
+                    </span>
+
+
+                    <h1>
+                        Your style,
+                        <br>
+                        your account.
+                    </h1>
+
+
+                    <p>
+                        Sign in or create your account to
+                        enjoy a smoother shopping experience,
+                        track orders and manage your profile.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+             RIGHT SIDE
+        ========================================== -->
+
+            <section class="login-panel">
+
+                <div class="login-box">
+
+
+                    <!-- Mobile Logo -->
+
+                    <a href="../index.html" class="mobile-login-logo">
+
+                        <img src="../asset/logo.png" alt="Nishat Fashion">
+
+                    </a>
+
+
+                    <!-- =================================
+                     TABS
+                ================================== -->
+
+                    <div class="auth-tabs">
+
+                        <button type="button" class="auth-tab active" id="loginTab">
+                            Sign In
+                        </button>
+
+
+                        <button type="button" class="auth-tab" id="registerTab">
+                            Create Account
+                        </button>
+
+                    </div>
+
+
+                    <!-- =================================
+                     LOGIN FORM
+                ================================== -->
+
+                    <form id="loginForm" class="auth-form active-form" novalidate>
+
+                        <div class="login-heading">
+
+                            <span class="login-label">
+                                WELCOME BACK
+                            </span>
+
+                            <h2>
+                                Sign in to your account
+                            </h2>
+
+                            <p>
+                                Enter your account details
+                                to continue shopping.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label for="loginEmail">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Password -->
+
+                        <div class="form-group">
+
+                            <div class="label-row">
+
+                                <label for="loginPassword">
+                                    Password
+                                </label>
+
+                                <a href="#" id="forgotPassword">
+                                    Forgot password?
+                                </a>
+
+                            </div>
+
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input type="password" id="loginPassword" placeholder="Enter your password"
+                                    autocomplete="current-password" required>
+
+
+                                <button type="button" class="password-toggle" data-target="loginPassword"
+                                    aria-label="Show password">
+
+                                    <i class="fa-regular fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Remember -->
+
+                        <label class="remember-row">
+
+                            <input type="checkbox" id="rememberMe">
+
+                            <span>
+                                Remember me
+                            </span>
+
+                        </label>
+
+
+                        <!-- Login -->
+
+                        <button type="submit" class="primary-auth-btn" id="loginSubmitBtn">
+
+                            <span>
+                                Sign In
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                        <!-- Divider -->
+
+                        <div class="or-divider">
+                            <span>OR</span>
+                        </div>
+
+
+                        <!-- Google -->
+
+                        <button type="button" class="google-login-btn" id="googleLoginBtn">
+
+                            <span class="google-icon">
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                                    <path fill="#4285F4"
+                                        d="M21.35 12.23c0-.79-.07-1.55-.23-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.42z" />
+
+                                    <path fill="#34A853"
+                                        d="M12 21.5c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.52A9.74 9.74 0 0 0 12 21.5z" />
+
+                                    <path fill="#FBBC05"
+                                        d="M6.54 13.6A5.86 5.86 0 0 1 6.23 12c0-.56.1-1.1.31-1.6V7.88H3.3A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.05 4.12l3.24-2.52z" />
+
+                                    <path fill="#EA4335"
+                                        d="M12 6.37c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.4 14.63 2.5 12 2.5a9.74 9.74 0 0 0-8.7 5.38l3.24 2.52C6.31 8.09 8.46 6.37 12 6.37z" />
+
+                                </svg>
+
+                            </span>
+
+                            <span>
+                                Continue with Google
+                            </span>
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- =================================
+                     REGISTER FORM
+                ================================== -->
+
+                    <form id="registerForm" class="auth-form" novalidate>
+
+                        <div class="login-heading">
+
+                            <span class="login-label">
+                                JOIN NISHAT FASHION
+                            </span>
+
+                            <h2>
+                                Create your account
+                            </h2>
+
+                            <p>
+                                Create an account to place orders,
+                                track deliveries and manage your profile.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Name -->
+
+                        <div class="form-group">
+
+                            <label for="registerName">
+                                Full Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input type="text" id="registerName" placeholder="Your full name" autocomplete="name"
+                                    maxlength="80" required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label for="registerEmail">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input type="email" id="registerEmail" placeholder="you@example.com"
+                                    autocomplete="email" required>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div class="form-group">
+
+                            <label for="registerPhone">
+                                Mobile Number
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <input type="tel" id="registerPhone" placeholder="01XXXXXXXXX" autocomplete="tel"
+                                    maxlength="14" required>
+
+                            </div>
+
+                            <small class="field-help">
+                                Used for delivery and order contact.
+                            </small>
+
+                        </div>
+
+
+                        <!-- Password -->
+
+                        <div class="form-group">
+
+                            <label for="registerPassword">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input type="password" id="registerPassword" placeholder="Minimum 6 characters"
+                                    autocomplete="new-password" required>
+
+                                <button type="button" class="password-toggle" data-target="registerPassword"
+                                    aria-label="Show password">
+
+                                    <i class="fa-regular fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Confirm Password -->
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input type="password" id="confirmPassword" placeholder="Re-enter your password"
+                                    autocomplete="new-password" required>
+
+                                <button type="button" class="password-toggle" data-target="confirmPassword"
+                                    aria-label="Show password">
+
+                                    <i class="fa-regular fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Terms -->
+
+                        <label class="terms-check">
+
+                            <input type="checkbox" id="agreeTerms" required>
+
+                            <span>
+
+                                I agree to the
+                                <a href="../policies.html">
+                                    Terms & Conditions
+                                </a>
+
+                                and
+
+                                <a href="../policies.html">
+                                    Privacy Policy
+                                </a>.
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- Register -->
+
+                        <button type="submit" class="primary-auth-btn" id="registerSubmitBtn">
+
+                            <span>
+                                Create Account
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                        <!-- Divider -->
+
+                        <div class="or-divider">
+                            <span>OR</span>
+                        </div>
+
+
+                        <!-- Google -->
+
+                        <button type="button" class="google-login-btn" id="googleRegisterBtn">
+
+                            <span class="google-icon">
+
+                                <svg viewBox="0 0 24 24">
+
+                                    <path fill="#4285F4"
+                                        d="M21.35 12.23c0-.79-.07-1.55-.23-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.7 2.91-4.2 2.91-7.42z" />
+
+                                    <path fill="#34A853"
+                                        d="M12 21.5c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.72-5.46-4.03H3.3v2.52A9.74 9.74 0 0 0 12 21.5z" />
+
+                                    <path fill="#FBBC05"
+                                        d="M6.54 13.6A5.86 5.86 0 0 1 6.23 12c0-.56.1-1.1.31-1.6V7.88H3.3A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.05 4.12l3.24-2.52z" />
+
+                                    <path fill="#EA4335"
+                                        d="M12 6.37c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.4 14.63 2.5 12 2.5a9.74 9.74 0 0 0-8.7 5.38l3.24 2.52C6.31 8.09 8.46 6.37 12 6.37z" />
+
+                                </svg>
+
+                            </span>
+
+                            <span>
+                                Continue with Google
+                            </span>
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- =================================
+                     MESSAGE
+                ================================== -->
+
+                    <div class="auth-message" id="authMessage" hidden>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span id="authMessageText"></span>
+                    </div>
+
+
+                    <!-- =================================
+                     LOADING
+                ================================== -->
+
+                    <div class="auth-loading" id="authLoading" hidden>
+                        <span class="spinner"></span>
+                        <span id="loadingText">Please wait...</span>
+                    </div>
+
+
+                    <!-- =================================
+                     SECURITY
+                ================================== -->
+
+                    <div class="login-security">
+
+                        <div class="security-item">
+
+                            <div class="security-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Secure account
+                                </strong>
+
+                                <span>
+                                    Protected by Firebase Authentication
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Back Home -->
+
+                    <a href="../index.html" class="back-home">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Back to Home
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script type="module" src="./login.js"></script>
+
+</body>
+
+</html>

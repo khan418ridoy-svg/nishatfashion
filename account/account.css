@@ -1,0 +1,469 @@
+/* ==========================================
+   NISHAT FASHION - MY ACCOUNT
+========================================== */
+
+.account-page {
+    background: #f7f7f7;
+    min-height: 70vh;
+    padding: 60px 20px;
+}
+
+.account-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* TITLE */
+
+.account-title {
+    margin-bottom: 35px;
+}
+
+.account-title span {
+    font-size: 13px;
+    color: #777;
+}
+
+.account-title h1 {
+    margin: 7px 0;
+    font-size: 32px;
+    color: #111;
+}
+
+.account-title p {
+    margin: 0;
+    color: #777;
+}
+
+
+/* LAYOUT */
+
+.account-layout {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 25px;
+}
+
+
+/* SIDEBAR */
+
+.account-sidebar {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    overflow: hidden;
+    height: fit-content;
+}
+
+
+.account-user {
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.account-user h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+}
+
+
+.account-user p {
+    margin: 0;
+    color: #888;
+    font-size: 12px;
+
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* MENU */
+
+.account-menu {
+    padding: 10px;
+}
+
+
+.account-menu-item {
+    width: 100%;
+    border: 0;
+    background: transparent;
+
+    padding: 13px 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-align: left;
+
+    font-size: 14px;
+    color: #555;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+.account-menu-item span {
+    width: 22px;
+    font-size: 17px;
+}
+
+
+.account-menu-item:hover,
+.account-menu-item.active {
+    background: #111;
+    color: #fff;
+}
+
+
+.account-menu-item.logout {
+    color: #dc2626;
+    margin-top: 8px;
+}
+
+
+.account-menu-item.logout:hover {
+    background: #dc2626;
+    color: #fff;
+}
+
+
+/* CONTENT */
+
+.account-content {
+    min-width: 0;
+}
+
+
+.account-section {
+    display: none;
+
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+
+.account-section.active {
+    display: block;
+}
+
+
+.section-heading {
+    margin-bottom: 25px;
+}
+
+
+.section-heading h2 {
+    margin: 0 0 7px;
+    font-size: 23px;
+    color: #111;
+}
+
+
+.section-heading p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* CARDS */
+
+.account-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+
+.account-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    text-decoration: none;
+    color: #111;
+
+    transition: .2s;
+}
+
+
+.account-card:hover {
+    border-color: #111;
+    transform: translateY(-2px);
+}
+
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 8px;
+    background: #f4f4f4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+
+.account-card strong {
+    display: block;
+    font-size: 22px;
+}
+
+
+.account-card span {
+    display: block;
+    color: #777;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+
+/* QUICK ACTION */
+
+.quick-actions {
+    margin-top: 30px;
+}
+
+
+.quick-actions h3 {
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+.quick-grid a,
+.main-action {
+    display: inline-block;
+    padding: 13px 17px;
+
+    background: #111;
+    color: #fff;
+
+    text-decoration: none;
+    border-radius: 7px;
+
+    font-size: 13px;
+    text-align: center;
+}
+
+
+.quick-grid a:hover,
+.main-action:hover {
+    background: #333;
+}
+
+
+/* PROFILE */
+
+.profile-box {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.profile-row {
+    padding: 17px 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+
+.profile-row:last-child {
+    border-bottom: 0;
+}
+
+
+.profile-row label {
+    color: #777;
+    font-size: 14px;
+}
+
+
+.profile-row strong {
+    font-size: 14px;
+    word-break: break-word;
+}
+
+
+/* ADDRESS */
+
+.address-list {
+    display: grid;
+    gap: 12px;
+}
+
+
+.address-item {
+    padding: 18px;
+    border: 1px solid #eee;
+    border-radius: 9px;
+}
+
+
+.address-item strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+
+.address-item p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+.empty-text {
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* SETTINGS */
+
+.settings-box {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.settings-box strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.settings-box p {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+}
+
+
+.settings-box button {
+    border: 0;
+    background: #dc2626;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* TABLET */
+
+@media (max-width: 850px) {
+
+    .account-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .account-sidebar {
+        width: 100%;
+    }
+
+    .account-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+
+    .account-menu-item.logout {
+        margin-top: 0;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 550px) {
+
+    .account-page {
+        padding: 35px 12px;
+    }
+
+    .account-title h1 {
+        font-size: 26px;
+    }
+
+    .account-section {
+        padding: 20px 15px;
+    }
+
+    .account-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .settings-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}

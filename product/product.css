@@ -1,0 +1,898 @@
+/* ==========================================
+   NISHAT FASHION
+   PRODUCT DETAILS
+========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #ffffff;
+
+    color: #111111;
+
+}
+
+
+img {
+
+    max-width: 100%;
+
+    display: block;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+/* ==========================================
+   PRODUCT PAGE
+========================================== */
+
+.product-page {
+
+    width: min(
+        1200px,
+        calc(100% - 32px)
+    );
+
+    margin: 40px auto 80px;
+
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.product-loading {
+
+    min-height: 400px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    color: #666;
+
+}
+
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.product-error {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+
+.product-error h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.product-error p {
+
+    color: #666;
+
+    margin-bottom: 25px;
+
+}
+
+
+.product-error a {
+
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    background: #111;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+}
+
+
+/* ==========================================
+   PRODUCT DETAILS
+========================================== */
+
+.product-details {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(360px, 0.9fr);
+
+    gap: 60px;
+
+    align-items: start;
+
+}
+
+
+/* ==========================================
+   GALLERY
+========================================== */
+
+.product-gallery {
+
+    display: grid;
+
+    grid-template-columns: 82px 1fr;
+
+    gap: 15px;
+
+}
+
+
+.product-main-image {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    background: #f5f5f5;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+}
+
+
+.product-main-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+}
+
+
+.product-thumbnails {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.product-thumbnail {
+
+    width: 76px;
+
+    height: 76px;
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    padding: 3px;
+
+}
+
+
+.product-thumbnail.active {
+
+    border: 2px solid #111;
+
+}
+
+
+.product-thumbnail img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* ==========================================
+   PRODUCT INFO
+========================================== */
+
+.product-info {
+
+    padding-top: 5px;
+
+}
+
+
+.product-category {
+
+    color: #777;
+
+    font-size: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.product-name {
+
+    font-size: 34px;
+
+    line-height: 1.2;
+
+    margin-bottom: 14px;
+
+}
+
+
+.product-rating {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+    color: #666;
+
+}
+
+
+.stars {
+
+    color: #f5a623;
+
+    letter-spacing: 2px;
+
+}
+
+
+.product-price {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-bottom: 15px;
+
+}
+
+
+.product-stock {
+
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 5px;
+
+    background: #eef8ef;
+
+    color: #218838;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.product-stock.out-of-stock {
+
+    background: #fff0f0;
+
+    color: #d93025;
+
+}
+
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+.product-description {
+
+    padding: 20px 0;
+
+    border-top: 1px solid #eee;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+
+.product-description h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 9px;
+
+}
+
+
+.product-description p {
+
+    color: #666;
+
+    line-height: 1.7;
+
+}
+
+
+/* ==========================================
+   OPTIONS
+========================================== */
+
+.product-option {
+
+    margin-top: 22px;
+
+}
+
+
+.option-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.option-title span {
+
+    color: #777;
+
+}
+
+
+.option-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+.option-btn {
+
+    min-width: 45px;
+
+    padding: 10px 15px;
+
+    border: 1px solid #ccc;
+
+    background: #fff;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+}
+
+
+.option-btn:hover {
+
+    border-color: #111;
+
+}
+
+
+.option-btn.active {
+
+    background: #111;
+
+    color: #fff;
+
+    border-color: #111;
+
+}
+
+
+/* ==========================================
+   QUANTITY
+========================================== */
+
+.quantity-section {
+
+    margin-top: 25px;
+
+}
+
+
+.quantity-control {
+
+    display: flex;
+
+    width: 135px;
+
+    height: 42px;
+
+    margin-top: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+}
+
+
+.quantity-control button {
+
+    width: 40px;
+
+    border: 0;
+
+    background: #f5f5f5;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+}
+
+
+.quantity-control input {
+
+    width: 55px;
+
+    border: 0;
+
+    outline: 0;
+
+    text-align: center;
+
+    font-size: 16px;
+
+}
+
+
+.quantity-control input::-webkit-inner-spin-button,
+.quantity-control input::-webkit-outer-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.product-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 55px;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+}
+
+
+.product-actions button {
+
+    height: 50px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.add-cart-btn {
+
+    border: 1px solid #111;
+
+    background: #fff;
+
+    color: #111;
+
+}
+
+
+.add-cart-btn:hover {
+
+    background: #111;
+
+    color: #fff;
+
+}
+
+
+.buy-now-btn {
+
+    border: 1px solid #111;
+
+    background: #111;
+
+    color: #fff;
+
+}
+
+
+.buy-now-btn:hover {
+
+    opacity: .88;
+
+}
+
+
+.wishlist-btn {
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+
+    font-size: 25px !important;
+
+}
+
+
+.wishlist-btn.active {
+
+    color: #e63946;
+
+}
+
+
+/* ==========================================
+   META
+========================================== */
+
+.product-meta {
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee;
+
+    display: grid;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+}
+
+
+.product-meta span {
+
+    color: #666;
+
+}
+
+
+/* ==========================================
+   REVIEWS
+========================================== */
+
+.reviews-section,
+.related-section {
+
+    margin-top: 70px;
+
+}
+
+
+.section-title {
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 25px;
+
+}
+
+
+.reviews-list {
+
+    display: grid;
+
+    gap: 15px;
+
+}
+
+
+.review-item {
+
+    padding: 18px;
+
+    border: 1px solid #eee;
+
+    border-radius: 8px;
+
+}
+
+
+.review-name {
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+}
+
+
+.review-stars {
+
+    color: #f5a623;
+
+    margin-bottom: 8px;
+
+}
+
+
+.review-text {
+
+    color: #666;
+
+    line-height: 1.6;
+
+}
+
+
+.empty-reviews {
+
+    color: #777;
+
+}
+
+
+/* ==========================================
+   RELATED PRODUCTS
+========================================== */
+
+.related-products {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.related-card {
+
+    border: 1px solid #eee;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    text-decoration: none;
+
+    color: #111;
+
+}
+
+
+.related-card-image {
+
+    aspect-ratio: 1 / 1;
+
+    background: #f5f5f5;
+
+}
+
+
+.related-card-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.related-card-info {
+
+    padding: 14px;
+
+}
+
+
+.related-card-name {
+
+    font-size: 15px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.related-card-price {
+
+    font-weight: 700;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .product-details {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+    }
+
+
+    .product-name {
+
+        font-size: 28px;
+
+    }
+
+
+    .related-products {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .product-page {
+
+        width:
+            calc(100% - 20px);
+
+        margin-top: 20px;
+
+    }
+
+
+    .product-gallery {
+
+        grid-template-columns: 62px 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .product-thumbnail {
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+    .product-name {
+
+        font-size: 24px;
+
+    }
+
+
+    .product-price {
+
+        font-size: 24px;
+
+    }
+
+
+    .product-actions {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .wishlist-btn {
+
+        grid-column: span 2;
+
+    }
+
+
+    .related-products {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+}

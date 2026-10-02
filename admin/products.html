@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nishat Fashion - Products</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="products.css"
+    >
+</head>
+
+<body>
+
+<header class="admin-header">
+
+    <div class="admin-brand">
+
+        <img
+            src="../asset/logo.png"
+            alt="Nishat Fashion"
+        >
+
+        <span>Nishat Fashion Admin</span>
+
+    </div>
+
+    <div class="admin-user">
+
+        <span id="adminEmail">
+            Loading...
+        </span>
+
+        <a
+            href="dashboard.html"
+            class="dashboard-btn"
+        >
+            Dashboard
+        </a>
+
+        <button
+            type="button"
+            id="logoutBtn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="admin-container">
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-top">
+
+        <div>
+
+            <h1>Products</h1>
+
+            <p>
+                Manage Nishat Fashion products
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            id="addProductBtn"
+            class="primary-btn"
+        >
+            + Add Product
+        </button>
+
+    </div>
+
+
+    <!-- SEARCH / FILTER -->
+
+    <div class="products-toolbar">
+
+        <div class="search-box">
+
+            <i>⌕</i>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search product..."
+            >
+
+        </div>
+
+
+        <select id="categoryFilter">
+
+            <option value="">
+                All Categories
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div
+        id="loading"
+        class="loading"
+    >
+        Loading products...
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+        id="emptyState"
+        class="empty-state hidden"
+    >
+
+        <div class="empty-icon">
+            🛍️
+        </div>
+
+        <h2>
+            No Products Found
+        </h2>
+
+        <p>
+            Add your first product.
+        </p>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div class="products-table-wrap">
+
+        <table class="products-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Product</th>
+
+                    <th>Category</th>
+
+                    <th>Collection</th>
+
+                    <th>Price</th>
+
+                    <th>Stock</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="productsBody"></tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     PRODUCT MODAL
+===================================================== -->
+
+<div
+    id="productModal"
+    class="product-modal hidden"
+>
+
+    <div class="product-modal-box">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    Add Product
+                </h2>
+
+                <p>
+                    Add or update product information
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeModal"
+                class="close-modal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="productForm">
+
+            <input
+                type="hidden"
+                id="productId"
+            >
+
+
+            <!-- =================================================
+                 BASIC INFORMATION
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>01</span>
+
+                    <div>
+                        <strong>Basic Information</strong>
+                        <small>Product identity and classification</small>
+                    </div>
+
+                </div>
+
+
+                <div class="product-form-grid">
+
+                    <div class="form-group full">
+
+                        <label for="name">
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="e.g. Formal White Shirt"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="sku">
+                            SKU / Product Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="sku"
+                            placeholder="e.g. NF-SH-001"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            id="category"
+                            placeholder="e.g. Shirt"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="productCollection">
+                            Collection
+                        </label>
+
+                        <select id="productCollection">
+
+                            <option value="">
+                                Select Collection
+                            </option>
+
+                            <option value="Men">
+                                Men
+                            </option>
+
+                            <option value="Women">
+                                Women
+                            </option>
+
+                            <option value="Kids">
+                                Kids
+                            </option>
+
+                            <option value="Unisex">
+                                Unisex
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="brand">
+                            Brand
+                        </label>
+
+                        <input
+                            type="text"
+                            id="brand"
+                            value="Nishat Fashion"
+                            placeholder="Brand name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="material">
+                            Material / Fabric
+                        </label>
+
+                        <input
+                            type="text"
+                            id="material"
+                            placeholder="e.g. Cotton"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="fit">
+                            Fit
+                        </label>
+
+                        <select id="fit">
+
+                            <option value="">
+                                Select Fit
+                            </option>
+
+                            <option value="Regular">
+                                Regular
+                            </option>
+
+                            <option value="Slim">
+                                Slim
+                            </option>
+
+                            <option value="Relaxed">
+                                Relaxed
+                            </option>
+
+                            <option value="Oversized">
+                                Oversized
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PRICING & STOCK
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>02</span>
+
+                    <div>
+                        <strong>Pricing & Stock</strong>
+                        <small>Customer selling price and inventory</small>
+                    </div>
+
+                </div>
+
+
+                <div class="product-form-grid">
+
+                    <div class="form-group">
+
+                        <label for="salePrice">
+                            Sale Price (৳)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="salePrice"
+                            min="0"
+                            step="1"
+                            placeholder="890"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="oldPrice">
+                            Old Price (৳)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="oldPrice"
+                            min="0"
+                            step="1"
+                            placeholder="1200"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="discount">
+                            Discount %
+                        </label>
+
+                        <input
+                            type="number"
+                            id="discount"
+                            min="0"
+                            max="100"
+                            step="1"
+                            placeholder="24"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="stock">
+                            Stock
+                        </label>
+
+                        <input
+                            type="number"
+                            id="stock"
+                            min="0"
+                            step="1"
+                            placeholder="10"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 VARIANTS
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>03</span>
+
+                    <div>
+                        <strong>Colors & Sizes</strong>
+                        <small>Product options</small>
+                    </div>
+
+                </div>
+
+
+                <div class="product-form-grid">
+
+                    <div class="form-group">
+
+                        <label for="colors">
+                            Colors
+                        </label>
+
+                        <input
+                            type="text"
+                            id="colors"
+                            placeholder="Black, White, Blue"
+                        >
+
+                        <small class="field-help">
+                            Separate multiple colors with comma.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="sizes">
+                            Sizes
+                        </label>
+
+                        <input
+                            type="text"
+                            id="sizes"
+                            placeholder="S, M, L, XL"
+                        >
+
+                        <small class="field-help">
+                            Separate sizes with comma.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="tags">
+                            Tags
+                        </label>
+
+                        <input
+                            type="text"
+                            id="tags"
+                            placeholder="shirt, formal, cotton, office"
+                        >
+
+                        <small class="field-help">
+                            Useful for search and filtering.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 IMAGES
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>04</span>
+
+                    <div>
+                        <strong>Product Media</strong>
+                        <small>Images and video</small>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Product Images
+                    </label>
+
+                    <div class="cloudinary-upload-box">
+
+                        <button
+                            type="button"
+                            id="uploadImagesBtn"
+                            class="upload-btn"
+                        >
+                            ☁ Upload Images
+                        </button>
+
+                        <div
+                            id="imageUploadStatus"
+                            class="upload-status"
+                        ></div>
+
+                        <div
+                            id="imagePreview"
+                            class="image-preview"
+                        ></div>
+
+                        <textarea
+                            id="images"
+                            hidden
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="videoUrl">
+                        Product Video URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="videoUrl"
+                        placeholder="https://res.cloudinary.com/..."
+                    >
+
+                    <small class="field-help">
+                        Optional. Cloudinary video URL.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DESCRIPTION
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>05</span>
+
+                    <div>
+                        <strong>Product Description</strong>
+                        <small>Customer-visible information</small>
+                    </div>
+
+                </div>
+
+
+                <div class="product-form-grid">
+
+                    <div class="form-group full">
+
+                        <label for="shortDescription">
+                            Short Description
+                        </label>
+
+                        <textarea
+                            id="shortDescription"
+                            rows="4"
+                            placeholder="Short product description..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="description">
+                            Long Description
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="7"
+                            placeholder="Detailed product description..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEO
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>06</span>
+
+                    <div>
+                        <strong>SEO</strong>
+                        <small>Search engine information</small>
+                    </div>
+
+                </div>
+
+
+                <div class="product-form-grid">
+
+                    <div class="form-group full">
+
+                        <label for="seoTitle">
+                            SEO Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="seoTitle"
+                            placeholder="Formal White Shirt | Nishat Fashion"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="seoDescription">
+                            SEO Description
+                        </label>
+
+                        <textarea
+                            id="seoDescription"
+                            rows="4"
+                            placeholder="Write a short search engine description..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <div class="form-section">
+
+                <div class="section-title">
+
+                    <span>07</span>
+
+                    <div>
+                        <strong>Product Settings</strong>
+                        <small>Visibility and marketing</small>
+                    </div>
+
+                </div>
+
+
+                <div class="checkbox-row">
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="featured"
+                        >
+
+                        <span>
+                            Featured
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="newArrival"
+                        >
+
+                        <span>
+                            New Arrival
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="bestSeller"
+                        >
+
+                        <span>
+                            Best Seller
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            id="active"
+                            checked
+                        >
+
+                        <span>
+                            Active
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="formMessage"
+                class="form-message"
+            ></div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    id="cancelBtn"
+                    class="secondary-btn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    id="saveProductBtn"
+                    class="primary-btn"
+                >
+                    Save Product
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Cloudinary -->
+
+<script
+    src="https://upload-widget.cloudinary.com/latest/global/all.js"
+></script>
+
+
+<script
+    type="module"
+    src="products.js"
+></script>
+
+
+</body>
+
+</html>

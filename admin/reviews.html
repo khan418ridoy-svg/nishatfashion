@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>Reviews — Nishat Fashion</title>
+
+    <link
+        rel="stylesheet"
+        href="reviews-admin.css"
+    >
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <img
+            src="../asset/logo.png"
+            alt="Nishat Fashion"
+        >
+
+        <div>
+            <strong>Nishat Fashion</strong>
+
+            <span>
+                Review Management
+            </span>
+        </div>
+
+    </div>
+
+
+    <a
+        href="dashboard.html"
+        class="back-btn"
+    >
+        ← Back to Dashboard
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <div>
+
+            <h1>
+                Customer Reviews
+            </h1>
+
+            <p>
+                Manage customer reviews and publish approved reviews.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="refreshBtn"
+            class="refresh-btn"
+        >
+            ↻ Refresh
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================== -->
+
+    <section class="stats">
+
+        <article class="stat-card">
+
+            <span>
+                Total Reviews
+            </span>
+
+            <strong id="totalCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <span>
+                Pending
+            </span>
+
+            <strong id="pendingCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <span>
+                Approved
+            </span>
+
+            <strong id="approvedCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <span>
+                Rejected
+            </span>
+
+            <strong id="rejectedCount">
+                0
+            </strong>
+
+        </article>
+
+    </section>
+
+
+    <!-- =========================
+         REVIEW PANEL
+    ========================== -->
+
+    <section class="panel">
+
+        <div class="filters">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search customer, review or product..."
+            >
+
+
+            <select id="statusFilter">
+
+                <option value="all">
+                    All Reviews
+                </option>
+
+                <option value="pending">
+                    Pending
+                </option>
+
+                <option value="approved">
+                    Approved
+                </option>
+
+                <option value="rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <div
+            id="reviewsList"
+            class="reviews-list"
+        >
+
+            <div class="loading">
+                Loading reviews...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script
+    type="module"
+    src="reviews-admin.js"
+></script>
+
+</body>
+
+</html>

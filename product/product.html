@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Product Details - Nishat Fashion</title>
+
+    <link
+        rel="stylesheet"
+        href="./product.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <div id="header"></div>
+
+
+    <!-- =====================================
+         PRODUCT DETAILS
+    ====================================== -->
+
+    <main class="product-page">
+
+        <div
+            id="productLoading"
+            class="product-loading"
+        >
+            Loading product...
+        </div>
+
+
+        <div
+            id="productError"
+            class="product-error hidden"
+        >
+            <h2>Product not found</h2>
+
+            <p>
+                The product you are looking for
+                could not be found.
+            </p>
+
+            <a href="../shop/shop.html">
+                Back to Shop
+            </a>
+        </div>
+
+
+        <section
+            id="productDetails"
+            class="product-details hidden"
+        >
+
+            <!-- =================================
+                 IMAGE AREA
+            ================================== -->
+
+            <div class="product-gallery">
+
+                <div
+                    id="productThumbnails"
+                    class="product-thumbnails"
+                ></div>
+
+
+                <div class="product-main-image">
+
+                    <img
+                        id="productImage"
+                        src=""
+                        alt="Product"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 PRODUCT INFO
+            ================================== -->
+
+            <div class="product-info">
+
+                <div
+                    id="productCategory"
+                    class="product-category"
+                ></div>
+
+
+                <h1
+                    id="productName"
+                    class="product-name"
+                >
+                </h1>
+
+
+                <div class="product-rating">
+
+                    <span
+                        id="productRating"
+                        class="stars"
+                    >
+                        ★★★★★
+                    </span>
+
+                    <span
+                        id="reviewCount"
+                    >
+                        (0 reviews)
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="productPrice"
+                    class="product-price"
+                >
+                </div>
+
+
+                <div
+                    id="productStock"
+                    class="product-stock"
+                >
+                </div>
+
+
+                <!-- =================================
+                     DESCRIPTION
+                ================================== -->
+
+                <div class="product-description">
+
+                    <h3>
+                        Description
+                    </h3>
+
+                    <p
+                        id="productDescription"
+                    >
+                    </p>
+
+                </div>
+
+
+                <!-- =================================
+                     SIZE
+                ================================== -->
+
+                <div
+                    id="sizeSection"
+                    class="product-option hidden"
+                >
+
+                    <div class="option-title">
+
+                        <strong>
+                            Size
+                        </strong>
+
+                        <span
+                            id="selectedSize"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="sizeOptions"
+                        class="option-buttons"
+                    ></div>
+
+                </div>
+
+
+                <!-- =================================
+                     COLOR
+                ================================== -->
+
+                <div
+                    id="colorSection"
+                    class="product-option hidden"
+                >
+
+                    <div class="option-title">
+
+                        <strong>
+                            Color
+                        </strong>
+
+                        <span
+                            id="selectedColor"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="colorOptions"
+                        class="option-buttons"
+                    ></div>
+
+                </div>
+
+
+                <!-- =================================
+                     QUANTITY
+                ================================== -->
+
+                <div class="quantity-section">
+
+                    <strong>
+                        Quantity
+                    </strong>
+
+
+                    <div class="quantity-control">
+
+                        <button
+                            type="button"
+                            id="quantityMinus"
+                        >
+                            −
+                        </button>
+
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            value="1"
+                            min="1"
+                            max="99"
+                        >
+
+
+                        <button
+                            type="button"
+                            id="quantityPlus"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     ACTIONS
+                ================================== -->
+
+                <div class="product-actions">
+
+                    <button
+                        type="button"
+                        id="addToCartBtn"
+                        class="add-cart-btn"
+                    >
+                        Add to Cart
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="buyNowBtn"
+                        class="buy-now-btn"
+                    >
+                        Buy Now
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="wishlistBtn"
+                        class="wishlist-btn"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <!-- =================================
+                     PRODUCT META
+                ================================== -->
+
+                <div class="product-meta">
+
+                    <div>
+
+                        <strong>
+                            Product Code:
+                        </strong>
+
+                        <span
+                            id="productCode"
+                        >
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Category:
+                        </strong>
+
+                        <span
+                            id="productMetaCategory"
+                        >
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             REVIEWS
+        ====================================== -->
+
+        <section
+            id="reviewsSection"
+            class="reviews-section hidden"
+        >
+
+            <div class="section-title">
+
+                <h2>
+                    Customer Reviews
+                </h2>
+
+            </div>
+
+
+            <div
+                id="reviewsList"
+                class="reviews-list"
+            >
+
+                <p class="empty-reviews">
+                    No reviews yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RELATED PRODUCTS
+        ====================================== -->
+
+        <section
+            id="relatedSection"
+            class="related-section hidden"
+        >
+
+            <div class="section-title">
+
+                <h2>
+                    Related Products
+                </h2>
+
+            </div>
+
+
+            <div
+                id="relatedProducts"
+                class="related-products"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <div id="footer"></div>
+
+
+    <!-- =====================================
+         COMMON JS
+    ====================================== -->
+
+    <script
+        type="module"
+        src="../common/common.js"
+    ></script>
+
+
+    <!-- =====================================
+         PRODUCT JS
+    ====================================== -->
+
+    <script
+        type="module"
+        src="./product.js"
+    ></script>
+
+</body>
+
+</html>
