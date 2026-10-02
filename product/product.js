@@ -1,6 +1,6 @@
 // ==========================================
 // NISHAT FASHION - PRODUCT DETAILS JS
-// FIRESTORE + CACHE
+// PRODUCT CACHE + GOOGLE SHEET REVIEWS
 // ==========================================
 
 import {
@@ -14,26 +14,78 @@ import {
 
 import {
     doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where,
-    limit
+    setDoc,
+    deleteDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
+import {
+    getProducts
+} from "../shop/products.js";
+
 
 // ==========================================
-// CACHE
+// CONFIG
 // ==========================================
 
-const CACHE_TIME =
-    25 * 60 * 1000;
-
+const CACHE_TIME = 25 * 60 * 1000;
 
 const PRODUCT_CACHE_PREFIX =
     "nishat_product_";
 
+const CART_KEY =
+    "nishat_cart";
+
+const WISHLIST_KEY =
+    "nishat_wishlist";
+
+const MAX_QUANTITY = 99;
+
+
+// ==========================================
+// GOOGLE SHEET REVIEW API
+// ==========================================
+
+const REVIEWS_API_URL =
+    "https://script.google.com/macros/s/AKfycbywWOHsHkWGSybOafWxszeyMV_gng4iWj6zFd1lUw_nQ3rzGcXUvs9xml29XD7kdW6b/exec";
+
+
+// প্রথমে 3টি
+const INITIAL_REVIEWS = 3;
+
+// এরপর প্রতি বার 10টি
+const MORE_REVIEWS = 10;
+
+
+// ==========================================
+// REVIEW STATE
+// ==========================================
+
+let reviews = [];
+
+let reviewsLoaded = 0;
+
+let reviewsLoading = false;
+
+let reviewsHasMore = true;
+
+
+// ==========================================
+// URL PRODUCT ID
+// ==========================================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const productId =
+    params.get("id");
+
+
+// ==========================================
+// PRODUCT CACHE
+// ==========================================
 
 function getProductCacheKey(id) {
 
@@ -42,24 +94,19 @@ function getProductCacheKey(id) {
 }
 
 
-function saveProductCache(id, data) {
+function saveProductCache(
+    id,
+    data
+) {
 
     try {
 
         localStorage.setItem(
-
             getProductCacheKey(id),
-
             JSON.stringify({
-
-                timestamp:
-                    Date.now(),
-
-                data:
-                    data
-
+                timestamp: Date.now(),
+                data: data
             })
-
         );
 
     } catch (error) {
@@ -83,17 +130,12 @@ function getProductCache(id) {
                 getProductCacheKey(id)
             );
 
-
         if (!raw) {
-
             return null;
-
         }
-
 
         const cache =
             JSON.parse(raw);
-
 
         if (
             !cache ||
@@ -109,7 +151,6 @@ function getProductCache(id) {
 
         }
 
-
         if (
             Date.now() -
             cache.timestamp >
@@ -123,7 +164,6 @@ function getProductCache(id) {
             return null;
 
         }
-
 
         return cache.data;
 
@@ -142,21 +182,7 @@ function getProductCache(id) {
 
 
 // ==========================================
-// URL PRODUCT ID
-// ==========================================
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const productId =
-    params.get("id");
-
-
-// ==========================================
-// ELEMENTS
+// DOM ELEMENTS
 // ==========================================
 
 const loading =
@@ -164,154 +190,144 @@ const loading =
         "productLoading"
     );
 
-
 const errorBox =
     document.getElementById(
         "productError"
     );
-
 
 const productDetails =
     document.getElementById(
         "productDetails"
     );
 
-
 const productImage =
     document.getElementById(
         "productImage"
     );
-
 
 const productThumbnails =
     document.getElementById(
         "productThumbnails"
     );
 
-
 const productCategory =
     document.getElementById(
         "productCategory"
     );
-
 
 const productName =
     document.getElementById(
         "productName"
     );
 
-
 const productRating =
     document.getElementById(
         "productRating"
     );
-
 
 const reviewCount =
     document.getElementById(
         "reviewCount"
     );
 
-
 const productPrice =
     document.getElementById(
         "productPrice"
     );
-
 
 const productStock =
     document.getElementById(
         "productStock"
     );
 
-
 const productDescription =
     document.getElementById(
         "productDescription"
     );
-
 
 const productCode =
     document.getElementById(
         "productCode"
     );
 
-
 const productMetaCategory =
     document.getElementById(
         "productMetaCategory"
     );
-
 
 const quantityInput =
     document.getElementById(
         "quantity"
     );
 
-
 const sizeSection =
     document.getElementById(
         "sizeSection"
     );
-
 
 const sizeOptions =
     document.getElementById(
         "sizeOptions"
     );
 
-
 const selectedSize =
     document.getElementById(
         "selectedSize"
     );
-
 
 const colorSection =
     document.getElementById(
         "colorSection"
     );
 
-
 const colorOptions =
     document.getElementById(
         "colorOptions"
     );
-
 
 const selectedColor =
     document.getElementById(
         "selectedColor"
     );
 
-
 const addToCartBtn =
     document.getElementById(
         "addToCartBtn"
     );
-
 
 const buyNowBtn =
     document.getElementById(
         "buyNowBtn"
     );
 
-
 const wishlistBtn =
     document.getElementById(
         "wishlistBtn"
     );
-
 
 const quantityMinus =
     document.getElementById(
         "quantityMinus"
     );
 
-
 const quantityPlus =
     document.getElementById(
         "quantityPlus"
+    );
+
+
+// ==========================================
+// REVIEW ELEMENTS
+// ==========================================
+
+const reviewsList =
+    document.getElementById(
+        "reviewsList"
+    );
+
+const loadMoreReviewsBtn =
+    document.getElementById(
+        "loadMoreReviews"
     );
 
 
@@ -342,7 +358,6 @@ document.addEventListener(
 
         }
 
-
         await loadProduct(
             productId
         );
@@ -357,68 +372,79 @@ document.addEventListener(
 
 async function loadProduct(id) {
 
-    // ======================================
-    // CACHE FIRST
-    // ======================================
-
-    const cached =
-        getProductCache(id);
-
-
-    if (cached) {
-
-        console.log(
-            "Product loaded from cache:",
-            id
-        );
-
-        currentProduct =
-            cached;
-
-        renderProduct(
-            cached
-        );
-
-        await loadRelatedProducts(
-            cached
-        );
-
-        return;
-
-    }
-
-
-    // ======================================
-    // FIRESTORE
-    // ======================================
-
     try {
 
-        /*
-         * IMPORTANT:
-         *
-         * এখানে products collection ধরে নেওয়া হয়েছে।
-         *
-         * যদি আপনার Firestore path হয়:
-         * products/{productId}
-         * তাহলে এই code সরাসরি কাজ করবে।
-         */
+        // --------------------------------------
+        // CACHE FIRST
+        // --------------------------------------
 
-        const productRef =
-            doc(
-                db,
-                "products",
+        const cached =
+            getProductCache(id);
+
+        if (cached) {
+
+            console.log(
+                "Product loaded from cache:",
                 id
             );
 
+            currentProduct =
+                cached;
 
-        const snapshot =
-            await getDoc(
-                productRef
+            renderProduct(
+                cached
+            );
+
+            await loadRelatedProducts(
+                cached
+            );
+
+            return;
+
+        }
+
+
+        // --------------------------------------
+        // PRODUCTS.JS CACHE
+        // --------------------------------------
+
+        const products =
+            await getProducts();
+
+
+        if (
+            !Array.isArray(products)
+        ) {
+
+            showError();
+
+            return;
+
+        }
+
+
+        const product =
+            products.find(
+                item => {
+
+                    const itemId =
+                        item.id ??
+                        item.productId;
+
+                    return String(
+                        itemId
+                    ) === String(id);
+
+                }
             );
 
 
-        if (!snapshot.exists()) {
+        if (!product) {
+
+            console.warn(
+                "Product not found:",
+                id
+            );
 
             showError();
 
@@ -429,10 +455,12 @@ async function loadProduct(id) {
 
         const productData = {
 
-            id:
-                snapshot.id,
+            ...product,
 
-            ...snapshot.data()
+            id:
+                product.id ??
+                product.productId ??
+                id
 
         };
 
@@ -441,16 +469,9 @@ async function loadProduct(id) {
             productData;
 
 
-        // Save cache
         saveProductCache(
             id,
             productData
-        );
-
-
-        console.log(
-            "Product loaded from Firestore:",
-            id
         );
 
 
@@ -460,7 +481,8 @@ async function loadProduct(id) {
 
 
         await loadRelatedProducts(
-            productData
+            productData,
+            products
         );
 
 
@@ -470,7 +492,6 @@ async function loadProduct(id) {
             "Product load error:",
             error
         );
-
 
         showError();
 
@@ -483,7 +504,9 @@ async function loadProduct(id) {
 // RENDER PRODUCT
 // ==========================================
 
-function renderProduct(product) {
+function renderProduct(
+    product
+) {
 
     if (!product) {
 
@@ -498,20 +521,18 @@ function renderProduct(product) {
         "hidden"
     );
 
-
     errorBox?.classList.add(
         "hidden"
     );
-
 
     productDetails?.classList.remove(
         "hidden"
     );
 
 
-    // ======================================
+    // --------------------------------------
     // NAME
-    // ======================================
+    // --------------------------------------
 
     const name =
         product.name ||
@@ -531,9 +552,9 @@ function renderProduct(product) {
         `${name} - Nishat Fashion`;
 
 
-    // ======================================
+    // --------------------------------------
     // CATEGORY
-    // ======================================
+    // --------------------------------------
 
     const category =
         product.category ||
@@ -552,15 +573,14 @@ function renderProduct(product) {
     if (productMetaCategory) {
 
         productMetaCategory.textContent =
-            category ||
-            "—";
+            category || "—";
 
     }
 
 
-    // ======================================
+    // --------------------------------------
     // PRICE
-    // ======================================
+    // --------------------------------------
 
     const price =
         Number(
@@ -573,16 +593,14 @@ function renderProduct(product) {
     if (productPrice) {
 
         productPrice.textContent =
-            formatPrice(
-                price
-            );
+            formatPrice(price);
 
     }
 
 
-    // ======================================
+    // --------------------------------------
     // DESCRIPTION
-    // ======================================
+    // --------------------------------------
 
     if (productDescription) {
 
@@ -594,9 +612,9 @@ function renderProduct(product) {
     }
 
 
-    // ======================================
+    // --------------------------------------
     // PRODUCT CODE
-    // ======================================
+    // --------------------------------------
 
     if (productCode) {
 
@@ -609,53 +627,52 @@ function renderProduct(product) {
     }
 
 
-    // ======================================
+    // --------------------------------------
     // STOCK
-    // ======================================
+    // --------------------------------------
 
     renderStock(
         product
     );
 
 
-    // ======================================
+    // --------------------------------------
     // IMAGES
-    // ======================================
+    // --------------------------------------
 
     renderImages(
         product
     );
 
 
-    // ======================================
+    // --------------------------------------
     // SIZES
-    // ======================================
+    // --------------------------------------
 
     renderSizes(
         product
     );
 
 
-    // ======================================
+    // --------------------------------------
     // COLORS
-    // ======================================
+    // --------------------------------------
 
     renderColors(
         product
     );
 
 
-    // ======================================
-    // RATING
-    // ======================================
+    // --------------------------------------
+    // PRODUCT RATING
+    // --------------------------------------
 
     const rating =
         Number(
             product.rating || 0
         );
 
-
-    const reviews =
+    const productReviews =
         Number(
             product.reviewCount || 0
         );
@@ -664,9 +681,7 @@ function renderProduct(product) {
     if (productRating) {
 
         productRating.textContent =
-            getStars(
-                rating
-            );
+            getStars(rating);
 
     }
 
@@ -674,7 +689,648 @@ function renderProduct(product) {
     if (reviewCount) {
 
         reviewCount.textContent =
-            `(${reviews} reviews)`;
+            `(${productReviews} reviews)`;
+
+    }
+
+
+    // --------------------------------------
+    // GOOGLE SHEET REVIEWS
+    // --------------------------------------
+
+    loadReviews(
+        product.id
+    );
+
+}
+
+
+// ==========================================
+// LOAD REVIEWS
+// ==========================================
+
+async function loadReviews(
+    id
+) {
+
+    if (!reviewsList) {
+
+        console.warn(
+            "reviewsList not found."
+        );
+
+        return;
+
+    }
+
+
+    reviews = [];
+
+    reviewsLoaded = 0;
+
+    reviewsHasMore = true;
+
+
+    reviewsList.innerHTML = `
+        <div class="reviews-loading">
+            Loading reviews...
+        </div>
+    `;
+
+
+    if (loadMoreReviewsBtn) {
+
+        loadMoreReviewsBtn.style.display =
+            "none";
+
+    }
+
+
+    await fetchReviews(
+        id,
+        INITIAL_REVIEWS
+    );
+
+}
+
+
+// ==========================================
+// FETCH REVIEWS
+// ==========================================
+
+async function fetchReviews(
+    id,
+    limitCount
+) {
+
+    if (
+        reviewsLoading ||
+        !reviewsHasMore
+    ) {
+
+        return;
+
+    }
+
+
+    reviewsLoading = true;
+
+
+    try {
+
+        const offset =
+            reviewsLoaded;
+
+
+        const url =
+            new URL(
+                REVIEWS_API_URL
+            );
+
+
+        url.searchParams.set(
+            "action",
+            "reviews"
+        );
+
+        url.searchParams.set(
+            "productId",
+            id
+        );
+
+        url.searchParams.set(
+            "status",
+            "approved"
+        );
+
+        url.searchParams.set(
+            "limit",
+            String(limitCount)
+        );
+
+        url.searchParams.set(
+            "offset",
+            String(offset)
+        );
+
+
+        const response =
+            await fetch(
+                url.toString(),
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Review API HTTP ${response.status}`
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        // --------------------------------------
+        // SUPPORT DIFFERENT API RESPONSE TYPES
+        // --------------------------------------
+
+        let newReviews = [];
+
+
+        if (
+            Array.isArray(result)
+        ) {
+
+            newReviews =
+                result;
+
+        } else if (
+            Array.isArray(
+                result.reviews
+            )
+        ) {
+
+            newReviews =
+                result.reviews;
+
+        } else if (
+            Array.isArray(
+                result.data
+            )
+        ) {
+
+            newReviews =
+                result.data;
+
+        }
+
+
+        // --------------------------------------
+        // ONLY APPROVED
+        // --------------------------------------
+
+        newReviews =
+            newReviews.filter(
+                review => {
+
+                    const status =
+                        String(
+                            review.status ??
+                            "approved"
+                        )
+                            .trim()
+                            .toLowerCase();
+
+                    return (
+                        status ===
+                        "approved"
+                    );
+
+                }
+            );
+
+
+        // --------------------------------------
+        // ADD TO CURRENT LIST
+        // --------------------------------------
+
+        reviews.push(
+            ...newReviews
+        );
+
+
+        reviewsLoaded =
+            reviews.length;
+
+
+        // --------------------------------------
+        // HAS MORE
+        // --------------------------------------
+
+        if (
+            newReviews.length <
+            limitCount
+        ) {
+
+            reviewsHasMore =
+                false;
+
+        }
+
+
+        renderReviews();
+
+
+    } catch (error) {
+
+        console.error(
+            "Reviews loading error:",
+            error
+        );
+
+
+        if (
+            reviews.length === 0
+        ) {
+
+            reviewsList.innerHTML = `
+                <div class="reviews-empty">
+                    Reviews could not be loaded.
+                </div>
+            `;
+
+        }
+
+
+    } finally {
+
+        reviewsLoading =
+            false;
+
+    }
+
+}
+
+
+// ==========================================
+// LOAD MORE REVIEWS
+// ==========================================
+
+loadMoreReviewsBtn?.addEventListener(
+    "click",
+    async () => {
+
+        if (
+            !currentProduct ||
+            reviewsLoading ||
+            !reviewsHasMore
+        ) {
+
+            return;
+
+        }
+
+
+        const oldText =
+            loadMoreReviewsBtn.textContent;
+
+
+        loadMoreReviewsBtn.disabled =
+            true;
+
+
+        loadMoreReviewsBtn.textContent =
+            "Loading...";
+
+
+        await fetchReviews(
+            currentProduct.id,
+            MORE_REVIEWS
+        );
+
+
+        loadMoreReviewsBtn.disabled =
+            false;
+
+
+        loadMoreReviewsBtn.textContent =
+            oldText ||
+            "Load More Reviews";
+
+    }
+);
+
+
+// ==========================================
+// RENDER REVIEWS
+// ==========================================
+
+function renderReviews() {
+
+    if (!reviewsList) {
+
+        return;
+
+    }
+
+
+    if (
+        reviews.length === 0
+    ) {
+
+        reviewsList.innerHTML = `
+            <div class="reviews-empty">
+                <div class="reviews-empty-icon">
+                    ★
+                </div>
+
+                <div>
+                    No reviews yet.
+                </div>
+            </div>
+        `;
+
+
+        if (loadMoreReviewsBtn) {
+
+            loadMoreReviewsBtn.style.display =
+                "none";
+
+        }
+
+        return;
+
+    }
+
+
+    reviewsList.innerHTML =
+        reviews
+            .map(
+                review =>
+                    createReviewHTML(
+                        review
+                    )
+            )
+            .join("");
+
+
+    if (
+        loadMoreReviewsBtn
+    ) {
+
+        loadMoreReviewsBtn.style.display =
+            reviewsHasMore
+                ? "block"
+                : "none";
+
+    }
+
+}
+
+
+// ==========================================
+// CREATE REVIEW HTML
+// ==========================================
+
+function createReviewHTML(
+    review
+) {
+
+    const name =
+        review.userName ||
+        review.name ||
+        "Customer";
+
+
+    const rating =
+        Math.max(
+            0,
+            Math.min(
+                5,
+                Number(
+                    review.rating || 0
+                )
+            )
+        );
+
+
+    const text =
+        review.reviewText ||
+        review.review ||
+        review.comment ||
+        "";
+
+
+    const date =
+        formatReviewDate(
+            review.updatedAt ||
+            review.createdAt ||
+            review.date
+        );
+
+
+    const images =
+        getReviewImages(
+            review
+        );
+
+
+    const imagesHTML =
+        images.length
+            ? `
+                <div class="review-images">
+
+                    ${images
+                        .map(
+                            image => `
+                                <a
+                                    href="${escapeHTML(image)}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <img
+                                        src="${escapeHTML(image)}"
+                                        alt="Customer review image"
+                                        loading="lazy"
+                                    >
+                                </a>
+                            `
+                        )
+                        .join("")}
+
+                </div>
+            `
+            : "";
+
+
+    return `
+
+        <article class="review-card">
+
+            <div class="review-header">
+
+                <div class="review-user">
+
+                    <div class="review-avatar">
+                        ${escapeHTML(
+                            name
+                                .trim()
+                                .charAt(0)
+                                .toUpperCase()
+                        )}
+                    </div>
+
+                    <div>
+
+                        <div class="review-user-name">
+                            ${escapeHTML(name)}
+                        </div>
+
+                        <div class="review-date">
+                            ${escapeHTML(date)}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="review-stars">
+                    ${getStars(rating)}
+                </div>
+
+            </div>
+
+
+            <div class="review-text">
+                ${escapeHTML(text)}
+            </div>
+
+
+            ${imagesHTML}
+
+        </article>
+
+    `;
+
+}
+
+
+// ==========================================
+// REVIEW IMAGES
+// ==========================================
+
+function getReviewImages(
+    review
+) {
+
+    const images = [];
+
+
+    if (
+        review.image1
+    ) {
+
+        images.push(
+            review.image1
+        );
+
+    }
+
+
+    if (
+        review.image2
+    ) {
+
+        images.push(
+            review.image2
+        );
+
+    }
+
+
+    if (
+        review.image3
+    ) {
+
+        images.push(
+            review.image3
+        );
+
+    }
+
+
+    // Support array format too
+
+    if (
+        Array.isArray(
+            review.images
+        )
+    ) {
+
+        review.images.forEach(
+            image => {
+
+                if (
+                    typeof image ===
+                    "string" &&
+                    image.trim()
+                ) {
+
+                    images.push(
+                        image.trim()
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    return [
+        ...new Set(
+            images
+                .filter(Boolean)
+                .slice(0, 3)
+        )
+    ];
+
+}
+
+
+// ==========================================
+// REVIEW DATE
+// ==========================================
+
+function formatReviewDate(
+    value
+) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    try {
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(value);
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-BD",
+            {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    } catch {
+
+        return String(value);
 
     }
 
@@ -685,7 +1341,9 @@ function renderProduct(product) {
 // STOCK
 // ==========================================
 
-function renderStock(product) {
+function renderStock(
+    product
+) {
 
     if (!productStock) {
 
@@ -707,7 +1365,9 @@ function renderStock(product) {
     );
 
 
-    if (stock <= 0) {
+    if (
+        stock <= 0
+    ) {
 
         productStock.textContent =
             "Out of stock";
@@ -765,7 +1425,9 @@ function renderStock(product) {
 // IMAGES
 // ==========================================
 
-function renderImages(product) {
+function renderImages(
+    product
+) {
 
     const images =
         getProductImages(
@@ -806,7 +1468,10 @@ function renderImages(product) {
 
 
     images.forEach(
-        (image, index) => {
+        (
+            image,
+            index
+        ) => {
 
             const button =
                 document.createElement(
@@ -817,12 +1482,13 @@ function renderImages(product) {
             button.type =
                 "button";
 
-
             button.className =
                 "product-thumbnail";
 
 
-            if (index === 0) {
+            if (
+                index === 0
+            ) {
 
                 button.classList.add(
                     "active"
@@ -840,9 +1506,11 @@ function renderImages(product) {
             img.src =
                 image;
 
-
             img.alt =
                 `Product image ${index + 1}`;
+
+            img.loading =
+                "lazy";
 
 
             button.appendChild(
@@ -854,7 +1522,9 @@ function renderImages(product) {
                 "click",
                 () => {
 
-                    if (productImage) {
+                    if (
+                        productImage
+                    ) {
 
                         productImage.src =
                             image;
@@ -899,7 +1569,9 @@ function renderImages(product) {
 // GET PRODUCT IMAGES
 // ==========================================
 
-function getProductImages(product) {
+function getProductImages(
+    product
+) {
 
     const images = [];
 
@@ -920,7 +1592,7 @@ function getProductImages(product) {
                 ) {
 
                     images.push(
-                        image
+                        image.trim()
                     );
 
                 }
@@ -986,7 +1658,9 @@ function getProductImages(product) {
 // SIZES
 // ==========================================
 
-function renderSizes(product) {
+function renderSizes(
+    product
+) {
 
     const sizes =
         Array.isArray(
@@ -1000,6 +1674,10 @@ function renderSizes(product) {
         sizes.length === 0
     ) {
 
+        sizeSection?.classList.add(
+            "hidden"
+        );
+
         return;
 
     }
@@ -1010,6 +1688,13 @@ function renderSizes(product) {
     );
 
 
+    if (!sizeOptions) {
+
+        return;
+
+    }
+
+
     sizeOptions.innerHTML =
         "";
 
@@ -1018,9 +1703,7 @@ function renderSizes(product) {
         size => {
 
             const value =
-                String(
-                    size
-                );
+                String(size);
 
 
             const button =
@@ -1032,10 +1715,8 @@ function renderSizes(product) {
             button.type =
                 "button";
 
-
             button.className =
                 "option-btn";
-
 
             button.textContent =
                 value;
@@ -1049,7 +1730,9 @@ function renderSizes(product) {
                         value;
 
 
-                    if (selectedSize) {
+                    if (
+                        selectedSize
+                    ) {
 
                         selectedSize.textContent =
                             value;
@@ -1094,7 +1777,9 @@ function renderSizes(product) {
 // COLORS
 // ==========================================
 
-function renderColors(product) {
+function renderColors(
+    product
+) {
 
     const colors =
         Array.isArray(
@@ -1108,6 +1793,10 @@ function renderColors(product) {
         colors.length === 0
     ) {
 
+        colorSection?.classList.add(
+            "hidden"
+        );
+
         return;
 
     }
@@ -1118,6 +1807,13 @@ function renderColors(product) {
     );
 
 
+    if (!colorOptions) {
+
+        return;
+
+    }
+
+
     colorOptions.innerHTML =
         "";
 
@@ -1126,9 +1822,7 @@ function renderColors(product) {
         color => {
 
             const value =
-                String(
-                    color
-                );
+                String(color);
 
 
             const button =
@@ -1140,10 +1834,8 @@ function renderColors(product) {
             button.type =
                 "button";
 
-
             button.className =
                 "option-btn";
-
 
             button.textContent =
                 value;
@@ -1157,7 +1849,9 @@ function renderColors(product) {
                         value;
 
 
-                    if (selectedColor) {
+                    if (
+                        selectedColor
+                    ) {
 
                         selectedColor.textContent =
                             value;
@@ -1208,7 +1902,7 @@ quantityMinus?.addEventListener(
 
         let quantity =
             Number(
-                quantityInput.value
+                quantityInput?.value
             ) || 1;
 
 
@@ -1219,8 +1913,12 @@ quantityMinus?.addEventListener(
             );
 
 
-        quantityInput.value =
-            quantity;
+        if (quantityInput) {
+
+            quantityInput.value =
+                quantity;
+
+        }
 
     }
 );
@@ -1232,19 +1930,23 @@ quantityPlus?.addEventListener(
 
         let quantity =
             Number(
-                quantityInput.value
+                quantityInput?.value
             ) || 1;
 
 
         quantity =
             Math.min(
-                99,
+                MAX_QUANTITY,
                 quantity + 1
             );
 
 
-        quantityInput.value =
-            quantity;
+        if (quantityInput) {
+
+            quantityInput.value =
+                quantity;
+
+        }
 
     }
 );
@@ -1264,7 +1966,7 @@ quantityInput?.addEventListener(
             Math.max(
                 1,
                 Math.min(
-                    99,
+                    MAX_QUANTITY,
                     quantity
                 )
             );
@@ -1314,7 +2016,7 @@ addToCartBtn?.addEventListener(
             );
 
 
-        const productRef =
+        const cartRef =
             doc(
                 db,
                 "users",
@@ -1326,19 +2028,28 @@ addToCartBtn?.addEventListener(
 
         try {
 
-            /*
-             * Cart implementation এখানে
-             * আপনার existing cart structure
-             * অনুযায়ী করা যাবে।
-             *
-             * আপাতত login check রাখা হয়েছে।
-             */
-
-            console.log(
-                "Add to cart:",
+            await setDoc(
+                cartRef,
                 {
-                    product:
+                    productId:
                         currentProduct.id,
+
+                    name:
+                        currentProduct.name ||
+                        currentProduct.title ||
+                        "Product",
+
+                    price:
+                        Number(
+                            currentProduct.salePrice ??
+                            currentProduct.price ??
+                            0
+                        ),
+
+                    image:
+                        getProductImages(
+                            currentProduct
+                        )[0] || "",
 
                     quantity:
                         quantity,
@@ -1347,8 +2058,20 @@ addToCartBtn?.addEventListener(
                         selectedSizeValue,
 
                     color:
-                        selectedColorValue
+                        selectedColorValue,
+
+                    updatedAt:
+                        serverTimestamp()
+                },
+                {
+                    merge: true
                 }
+            );
+
+
+            updateLocalCartCache(
+                currentProduct,
+                quantity
             );
 
 
@@ -1364,10 +2087,128 @@ addToCartBtn?.addEventListener(
                 error
             );
 
+            alert(
+                "Could not add product to cart."
+            );
+
         }
 
     }
 );
+
+
+// ==========================================
+// LOCAL CART CACHE
+// ==========================================
+
+function updateLocalCartCache(
+    product,
+    quantity
+) {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                CART_KEY
+            );
+
+
+        let cart =
+            raw
+                ? JSON.parse(raw)
+                : [];
+
+
+        if (
+            !Array.isArray(cart)
+        ) {
+
+            cart = [];
+
+        }
+
+
+        const existingIndex =
+            cart.findIndex(
+                item =>
+                    String(
+                        item.productId
+                    ) === String(
+                        product.id
+                    )
+            );
+
+
+        const item = {
+
+            productId:
+                product.id,
+
+            name:
+                product.name ||
+                product.title ||
+                "Product",
+
+            price:
+                Number(
+                    product.salePrice ??
+                    product.price ??
+                    0
+                ),
+
+            image:
+                getProductImages(
+                    product
+                )[0] || "",
+
+            quantity:
+                quantity,
+
+            size:
+                selectedSizeValue,
+
+            color:
+                selectedColorValue
+
+        };
+
+
+        if (
+            existingIndex >= 0
+        ) {
+
+            cart[existingIndex] =
+                {
+                    ...cart[existingIndex],
+                    ...item
+                };
+
+        } else {
+
+            cart.push(
+                item
+            );
+
+        }
+
+
+        localStorage.setItem(
+            CART_KEY,
+            JSON.stringify(cart)
+        );
+
+
+    } catch (error) {
+
+        console.warn(
+            "Local cart cache error:",
+            error
+        );
+
+    }
+
+}
 
 
 // ==========================================
@@ -1425,13 +2266,10 @@ buyNowBtn?.addEventListener(
 
 
         sessionStorage.setItem(
-
             "nishat_buy_now",
-
             JSON.stringify(
                 checkoutData
             )
-
         );
 
 
@@ -1473,41 +2311,266 @@ wishlistBtn?.addEventListener(
         }
 
 
-        console.log(
-            "Wishlist:",
-            currentProduct.id
-        );
+        const productId =
+            currentProduct.id;
 
 
-        wishlistBtn.classList.toggle(
-            "active"
-        );
+        const wishlistRef =
+            doc(
+                db,
+                "users",
+                user.uid,
+                "wishlist",
+                productId
+            );
 
 
-        wishlistBtn.textContent =
+        const isActive =
             wishlistBtn.classList.contains(
                 "active"
-            )
-                ? "♥"
-                : "♡";
+            );
+
+
+        try {
+
+            if (isActive) {
+
+                await deleteDoc(
+                    wishlistRef
+                );
+
+                wishlistBtn.classList.remove(
+                    "active"
+                );
+
+                wishlistBtn.textContent =
+                    "♡";
+
+
+                removeLocalWishlist(
+                    productId
+                );
+
+
+            } else {
+
+                await setDoc(
+                    wishlistRef,
+                    {
+                        productId:
+                            productId,
+
+                        name:
+                            currentProduct.name ||
+                            currentProduct.title ||
+                            "Product",
+
+                        price:
+                            Number(
+                                currentProduct.salePrice ??
+                                currentProduct.price ??
+                                0
+                            ),
+
+                        image:
+                            getProductImages(
+                                currentProduct
+                            )[0] || "",
+
+                        addedAt:
+                            serverTimestamp()
+                    }
+                );
+
+
+                wishlistBtn.classList.add(
+                    "active"
+                );
+
+                wishlistBtn.textContent =
+                    "♥";
+
+
+                saveLocalWishlist(
+                    currentProduct
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Wishlist error:",
+                error
+            );
+
+        }
 
     }
 );
 
 
 // ==========================================
+// LOCAL WISHLIST
+// ==========================================
+
+function saveLocalWishlist(
+    product
+) {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                WISHLIST_KEY
+            );
+
+
+        let list =
+            raw
+                ? JSON.parse(raw)
+                : [];
+
+
+        if (
+            !Array.isArray(list)
+        ) {
+
+            list = [];
+
+        }
+
+
+        const exists =
+            list.some(
+                item =>
+                    String(
+                        item.productId ??
+                        item.id
+                    ) === String(
+                        product.id
+                    )
+            );
+
+
+        if (!exists) {
+
+            list.push({
+
+                productId:
+                    product.id,
+
+                name:
+                    product.name ||
+                    product.title ||
+                    "Product",
+
+                price:
+                    Number(
+                        product.salePrice ??
+                        product.price ??
+                        0
+                    ),
+
+                image:
+                    getProductImages(
+                        product
+                    )[0] || ""
+
+            });
+
+        }
+
+
+        localStorage.setItem(
+            WISHLIST_KEY,
+            JSON.stringify(list)
+        );
+
+
+    } catch (error) {
+
+        console.warn(
+            "Wishlist cache error:",
+            error
+        );
+
+    }
+
+}
+
+
+function removeLocalWishlist(
+    productId
+) {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                WISHLIST_KEY
+            );
+
+
+        let list =
+            raw
+                ? JSON.parse(raw)
+                : [];
+
+
+        if (
+            !Array.isArray(list)
+        ) {
+
+            return;
+
+        }
+
+
+        list =
+            list.filter(
+                item =>
+                    String(
+                        item.productId ??
+                        item.id
+                    ) !==
+                    String(productId)
+            );
+
+
+        localStorage.setItem(
+            WISHLIST_KEY,
+            JSON.stringify(list)
+        );
+
+
+    } catch (error) {
+
+        console.warn(
+            "Wishlist remove cache error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
 // RELATED PRODUCTS
+// NO EXTRA FIRESTORE QUERY
 // ==========================================
 
 async function loadRelatedProducts(
-    product
+    product,
+    productsList = null
 ) {
 
     const container =
         document.getElementById(
             "relatedProducts"
         );
-
 
     const section =
         document.getElementById(
@@ -1527,7 +2590,8 @@ async function loadRelatedProducts(
 
     const category =
         product.category ||
-        product.categoryName;
+        product.categoryName ||
+        "";
 
 
     if (!category) {
@@ -1539,50 +2603,123 @@ async function loadRelatedProducts(
 
     try {
 
-        const productsRef =
-            collection(
-                db,
-                "products"
-            );
+        let products =
+            productsList;
 
 
-        const q =
-            query(
-                productsRef,
-                where(
-                    "category",
-                    "==",
-                    category
-                ),
-                limit(5)
-            );
+        if (
+            !Array.isArray(
+                products
+            )
+        ) {
+
+            products =
+                await getProducts();
+
+        }
 
 
-        const snapshot =
-            await getDocs(
-                q
-            );
+        const related =
+            products
+                .filter(
+                    item => {
+
+                        if (!item) {
+
+                            return false;
+
+                        }
+
+
+                        const itemId =
+                            item.id ??
+                            item.productId;
+
+
+                        if (
+                            String(itemId) ===
+                            String(product.id)
+                        ) {
+
+                            return false;
+
+                        }
+
+
+                        const itemCategory =
+                            item.category ||
+                            item.categoryName ||
+                            "";
+
+
+                        return (
+                            String(
+                                itemCategory
+                            )
+                                .toLowerCase() ===
+                            String(
+                                category
+                            )
+                                .toLowerCase()
+                        );
+
+                    }
+                )
+                .slice(
+                    0,
+                    5
+                );
 
 
         container.innerHTML =
             "";
 
 
-        snapshot.forEach(
+        if (
+            related.length === 0
+        ) {
+
+            section?.classList.add(
+                "hidden"
+            );
+
+            return;
+
+        }
+
+
+        related.forEach(
             item => {
 
-                if (
-                    item.id ===
-                    product.id
-                ) {
-
-                    return;
-
-                }
+                const itemId =
+                    item.id ??
+                    item.productId;
 
 
-                const data =
-                    item.data();
+                const name =
+                    item.name ||
+                    item.title ||
+                    "Product";
+
+
+                const image =
+                    item.image ||
+                    item.imageUrl ||
+                    (
+                        Array.isArray(
+                            item.images
+                        )
+                            ? item.images[0]
+                            : ""
+                    );
+
+
+                const price =
+                    Number(
+                        item.salePrice ??
+                        item.price ??
+                        0
+                    );
 
 
                 const card =
@@ -1597,28 +2734,8 @@ async function loadRelatedProducts(
 
                 card.href =
                     `./product.html?id=${encodeURIComponent(
-                        item.id
+                        itemId
                     )}`;
-
-
-                const image =
-                    data.image ||
-                    data.imageUrl ||
-                    (
-                        Array.isArray(
-                            data.images
-                        )
-                            ? data.images[0]
-                            : ""
-                    );
-
-
-                const price =
-                    Number(
-                        data.salePrice ??
-                        data.price ??
-                        0
-                    );
 
 
                 card.innerHTML = `
@@ -1627,11 +2744,8 @@ async function loadRelatedProducts(
 
                         <img
                             src="${escapeHTML(image)}"
-                            alt="${escapeHTML(
-                                data.name ||
-                                data.title ||
-                                "Product"
-                            )}"
+                            alt="${escapeHTML(name)}"
+                            loading="lazy"
                         >
 
                     </div>
@@ -1639,21 +2753,11 @@ async function loadRelatedProducts(
                     <div class="related-card-info">
 
                         <div class="related-card-name">
-
-                            ${escapeHTML(
-                                data.name ||
-                                data.title ||
-                                "Product"
-                            )}
-
+                            ${escapeHTML(name)}
                         </div>
 
                         <div class="related-card-price">
-
-                            ${formatPrice(
-                                price
-                            )}
-
+                            ${formatPrice(price)}
                         </div>
 
                     </div>
@@ -1669,15 +2773,9 @@ async function loadRelatedProducts(
         );
 
 
-        if (
-            container.children.length > 0
-        ) {
-
-            section?.classList.remove(
-                "hidden"
-            );
-
-        }
+        section?.classList.remove(
+            "hidden"
+        );
 
 
     } catch (error) {
@@ -1702,11 +2800,9 @@ function showError() {
         "hidden"
     );
 
-
     productDetails?.classList.add(
         "hidden"
     );
-
 
     errorBox?.classList.remove(
         "hidden"
@@ -1719,12 +2815,12 @@ function showError() {
 // FORMAT PRICE
 // ==========================================
 
-function formatPrice(price) {
+function formatPrice(
+    price
+) {
 
     const number =
-        Number(
-            price
-        ) || 0;
+        Number(price) || 0;
 
 
     return `৳${number.toLocaleString(
@@ -1738,7 +2834,9 @@ function formatPrice(price) {
 // STARS
 // ==========================================
 
-function getStars(rating) {
+function getStars(
+    rating
+) {
 
     const rounded =
         Math.round(
@@ -1748,23 +2846,22 @@ function getStars(rating) {
         );
 
 
-    return "★".repeat(
+    const safe =
         Math.min(
             5,
             Math.max(
                 0,
                 rounded
             )
-        )
-    ) +
-    "☆".repeat(
-        5 -
-        Math.min(
-            5,
-            Math.max(
-                0,
-                rounded
-            )
+        );
+
+
+    return (
+        "★".repeat(
+            safe
+        ) +
+        "☆".repeat(
+            5 - safe
         )
     );
 
@@ -1775,32 +2872,29 @@ function getStars(rating) {
 // HTML ESCAPE
 // ==========================================
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
     return String(
         value ?? ""
     )
-
         .replaceAll(
             "&",
             "&amp;"
         )
-
         .replaceAll(
             "<",
             "&lt;"
         )
-
         .replaceAll(
             ">",
             "&gt;"
         )
-
         .replaceAll(
             '"',
             "&quot;"
         )
-
         .replaceAll(
             "'",
             "&#039;"
@@ -1810,9 +2904,35 @@ function escapeHTML(value) {
 
 
 // ==========================================
+// AUTH STATE
+// ==========================================
+
+onAuthStateChanged(
+    auth,
+    user => {
+
+        if (!user) {
+
+            return;
+
+        }
+
+
+        // এখানে future user-specific
+        // product actions রাখা যাবে
+
+    }
+);
+
+
+// ==========================================
 // DEBUG
 // ==========================================
 
 console.log(
     "Nishat Fashion - Product Details JS loaded"
+);
+
+console.log(
+    "Google Sheet review system enabled"
 );
