@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Reviews — Nishat Fashion</title>
+
+
+    <!-- COMMON ADMIN CSS -->
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+
+    <!-- REVIEW PAGE CSS -->
+    <link
+        rel="stylesheet"
+        href="reviews-admin.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ADMIN HEADER
+====================================================== -->
+
+<header class="review-header">
+
+    <div class="review-brand">
+
+        <img
+            src="../asset/logo.png"
+            alt="Nishat Fashion"
+        >
+
+        <div>
+
+            <strong>
+                Nishat Fashion
+            </strong>
+
+            <span>
+                Review Management
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="review-header-right">
+
+        <a
+            href="dashboard.html"
+            class="dashboard-btn"
+        >
+            Dashboard
+        </a>
+
+
+        <span
+            id="adminEmail"
+            class="admin-email"
+        >
+            Admin
+        </span>
+
+
+        <button
+            id="logoutBtn"
+            type="button"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="review-container">
+
+
+    <!-- =================================================
+         PAGE TITLE
+    ================================================== -->
+
+    <section class="page-title">
+
+        <div>
+
+            <div class="eyebrow">
+                NISHAT FASHION
+            </div>
+
+            <h1>
+                Customer Reviews
+            </h1>
+
+            <p>
+                View customer reviews and manage review status.
+            </p>
+
+        </div>
+
+
+        <button
+            id="refreshBtn"
+            type="button"
+            class="refresh-btn"
+        >
+
+            ↻ Refresh
+
+        </button>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <section class="review-stats">
+
+
+        <article class="stat-card">
+
+            <span>
+                Total Reviews
+            </span>
+
+            <strong id="totalCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card pending-card">
+
+            <span>
+                Pending
+            </span>
+
+            <strong id="pendingCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card approved-card">
+
+            <span>
+                Approved
+            </span>
+
+            <strong id="approvedCount">
+                0
+            </strong>
+
+        </article>
+
+
+        <article class="stat-card rejected-card">
+
+            <span>
+                Rejected
+            </span>
+
+            <strong id="rejectedCount">
+                0
+            </strong>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FILTER
+    ================================================== -->
+
+    <section class="review-filter panel">
+
+
+        <div class="search-wrapper">
+
+            <span class="search-icon">
+                ⌕
+            </span>
+
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Search customer, product, review..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <select
+            id="statusFilter"
+        >
+
+            <option value="all">
+                All Reviews
+            </option>
+
+            <option value="pending">
+                Pending
+            </option>
+
+            <option value="approved">
+                Approved
+            </option>
+
+            <option value="rejected">
+                Rejected
+            </option>
+
+        </select>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================== -->
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+
+    <!-- =================================================
+         REVIEWS
+    ================================================== -->
+
+    <section
+        id="reviewsList"
+        class="reviews-list"
+    >
+
+        <div class="loading-card">
+
+            <span class="spinner"></span>
+
+            <span>
+                Loading reviews...
+            </span>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FULL PAGE LOADING
+====================================================== -->
+
+<div
+    id="pageLoading"
+    class="page-loading hidden"
+>
+
+    <div class="page-loading-box">
+
+        <span class="spinner large"></span>
+
+        <p id="loadingText">
+            Processing...
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JS
+====================================================== -->
+
+<script
+    type="module"
+    src="reviews-admin.js"
+></script>
+
+
+</body>
+
+</html>

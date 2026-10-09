@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account - Nishat Fashion</title>
+
+    <link rel="stylesheet" href="./account.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+
+    <!-- =========================
+         MY ACCOUNT
+    ========================== -->
+
+    <main class="account-page">
+
+        <div class="account-container">
+
+            <!-- PAGE TITLE -->
+
+            <div class="account-title">
+
+                <span>My Account</span>
+
+                <h1>Welcome Back</h1>
+
+                <p>
+                    Manage your profile, orders and account settings.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 ACCOUNT LAYOUT
+            ========================== -->
+
+            <div class="account-layout">
+
+
+                <!-- =========================
+                     SIDEBAR
+                ========================== -->
+
+                <aside class="account-sidebar">
+
+                    <div class="account-user">
+
+                        <div
+                            class="user-avatar"
+                            id="userAvatar"
+                        >
+                            U
+                        </div>
+
+                        <div>
+
+                            <h3 id="userName">
+                                User
+                            </h3>
+
+                            <p id="userEmail">
+                                Loading...
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MENU -->
+
+                    <nav class="account-menu">
+
+                        <button
+                            class="account-menu-item active"
+                            data-section="dashboard"
+                        >
+                            <span>⌂</span>
+                            Dashboard
+                        </button>
+
+
+                        <button
+                            class="account-menu-item"
+                            data-section="profile"
+                        >
+                            <span>👤</span>
+                            My Profile
+                        </button>
+
+
+                        <button
+                            class="account-menu-item"
+                            data-section="orders"
+                        >
+                            <span>📦</span>
+                            My Orders
+                        </button>
+
+
+                        <button
+                            class="account-menu-item"
+                            data-section="wishlist"
+                        >
+                            <span>♡</span>
+                            Wishlist
+                        </button>
+
+
+                        <button
+                            class="account-menu-item"
+                            data-section="addresses"
+                        >
+                            <span>📍</span>
+                            Addresses
+                        </button>
+
+
+                        <button
+                            class="account-menu-item"
+                            data-section="settings"
+                        >
+                            <span>⚙</span>
+                            Settings
+                        </button>
+
+
+                        <button
+                            class="account-menu-item logout"
+                            id="logoutBtn"
+                        >
+                            <span>↪</span>
+                            Logout
+                        </button>
+
+                    </nav>
+
+                </aside>
+
+
+                <!-- =========================
+                     CONTENT
+                ========================== -->
+
+                <section class="account-content">
+
+
+                    <!-- =========================
+                         DASHBOARD
+                    ========================== -->
+
+                    <div
+                        class="account-section active"
+                        id="dashboard"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                Dashboard
+                            </h2>
+
+                            <p>
+                                Manage your Nishat Fashion account.
+                            </p>
+
+                        </div>
+
+
+                        <!-- ACCOUNT CARDS -->
+
+                        <div class="account-cards">
+
+
+                            <!-- ORDERS -->
+
+                            <button
+                                class="account-card account-card-button"
+                                data-open-section="orders"
+                                type="button"
+                            >
+
+                                <div class="card-icon">
+                                    📦
+                                </div>
+
+                                <div>
+
+                                    <strong id="orderCount">
+                                        0
+                                    </strong>
+
+                                    <span>
+                                        Total Orders
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+                            <!-- WISHLIST -->
+
+                            <button
+                                class="account-card account-card-button"
+                                data-open-section="wishlist"
+                                type="button"
+                            >
+
+                                <div class="card-icon">
+                                    ♡
+                                </div>
+
+                                <div>
+
+                                    <strong id="wishlistCount">
+                                        0
+                                    </strong>
+
+                                    <span>
+                                        Wishlist Items
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+
+                            <!-- CART -->
+
+                            <a
+                                href="../cart/index.html"
+                                class="account-card"
+                            >
+
+                                <div class="card-icon">
+                                    🛒
+                                </div>
+
+                                <div>
+
+                                    <strong id="cartCount">
+                                        0
+                                    </strong>
+
+                                    <span>
+                                        Cart Items
+                                    </span>
+
+                                </div>
+
+                            </a>
+
+
+                            <!-- ADDRESS -->
+
+                            <button
+                                type="button"
+                                class="account-card account-card-button"
+                                data-open-section="addresses"
+                            >
+
+                                <div class="card-icon">
+                                    📍
+                                </div>
+
+                                <div>
+
+                                    <strong id="addressCount">
+                                        0
+                                    </strong>
+
+                                    <span>
+                                        Saved Addresses
+                                    </span>
+
+                                </div>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         PROFILE
+                    ========================== -->
+
+                    <div
+                        class="account-section"
+                        id="profile"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                My Profile
+                            </h2>
+
+                            <p>
+                                View your account information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="profile-actions">
+                            <span class="profile-edit-hint">Edit each field separately</span>
+                        </div>
+                        <div class="profile-box">
+
+                            <div class="profile-row">
+
+                                <label>
+                                    Full Name
+                                </label>
+
+                                <div class="profile-value-actions">
+                                    <strong id="profileName">—</strong>
+                                    <button type="button" class="account-action-btn account-action-secondary profile-field-edit" data-edit-profile-field="name">Edit name</button>
+                                </div>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <strong id="profileEmail">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <label>
+                                    Phone
+                                </label>
+
+                                <div class="profile-value-actions">
+                                    <strong id="profilePhone">—</strong>
+                                    <button type="button" class="account-action-btn account-action-secondary profile-field-edit" data-edit-profile-field="phone">Edit phone</button>
+                                </div>
+
+                            </div>
+
+
+                            <div class="profile-row">
+
+                                <label>
+                                    Account ID
+                                </label>
+
+                                <strong id="profileUid">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         ORDERS
+                    ========================== -->
+
+                    <div
+                        class="account-section"
+                        id="orders"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                My Orders
+                            </h2>
+
+                            <p>
+                                Your recent orders.
+                            </p>
+
+                        </div>
+
+
+                        <div class="orders-tools">
+                            <label class="account-field order-search-field">
+                                <span>Search orders</span>
+                                <input id="orderSearch" type="search" placeholder="Order ID or product name">
+                            </label>
+                            <label class="account-field">
+                                <span>Status</span>
+                                <select id="orderStatusFilter">
+                                    <option value="all">All statuses</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </label>
+                            <label class="account-field">
+                                <span>Sort by</span>
+                                <select id="orderSort">
+                                    <option value="newest">Newest first</option>
+                                    <option value="oldest">Oldest first</option>
+                                    <option value="high">Total: high to low</option>
+                                    <option value="low">Total: low to high</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <!-- ORDER LIST -->
+
+                        <div
+                            id="ordersList"
+                            class="orders-list"
+                        >
+
+                            <div class="account-loading">
+                                Loading orders...
+                            </div>
+
+                        </div>
+
+
+                        <!-- SEE MORE -->
+
+                        <button
+                            type="button"
+                            id="ordersMoreBtn"
+                            class="section-more-btn"
+                            hidden
+                        >
+                            See More
+                        </button>
+
+                    </div>
+
+
+                    <!-- =========================
+                         WISHLIST
+                    ========================== -->
+
+                    <div
+                        class="account-section"
+                        id="wishlist"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                Wishlist
+                            </h2>
+
+                            <p>
+                                Your saved products.
+                            </p>
+
+                        </div>
+
+
+                        <!-- WISHLIST LIST -->
+
+                        <div
+                            id="wishlistList"
+                            class="wishlist-list"
+                        >
+
+                            <div class="account-loading">
+                                Loading wishlist...
+                            </div>
+
+                        </div>
+
+
+                        <!-- SEE MORE -->
+
+                        <button
+                            type="button"
+                            id="wishlistMoreBtn"
+                            class="section-more-btn"
+                            hidden
+                        >
+                            See More
+                        </button>
+
+                    </div>
+
+
+                    <!-- =========================
+                         ADDRESSES
+                    ========================== -->
+
+                    <div
+                        class="account-section"
+                        id="addresses"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                My Addresses
+                            </h2>
+
+                            <p>
+                                Manage your delivery addresses.
+                            </p>
+
+                        </div>
+
+
+                        <div class="address-heading-actions">
+                            <p class="address-limit-note" id="addressLimitNote">You can save up to 3 addresses.</p>
+                            <button type="button" class="account-action-btn" id="addAddressBtn">+ Add address</button>
+                        </div>
+                        <div
+                            id="addressList"
+                            class="address-list"
+                        >
+
+                            <p class="empty-text">
+                                No saved addresses.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         SETTINGS
+                    ========================== -->
+
+                    <div
+                        class="account-section"
+                        id="settings"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2>
+                                Settings
+                            </h2>
+
+                            <p>
+                                Account settings.
+                            </p>
+
+                        </div>
+
+
+                        <div class="settings-box">
+
+                            <div>
+
+                                <strong>
+                                    Account Security
+                                </strong>
+
+                                <p>
+                                    Keep your account information secure.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-actions">
+                                <button type="button" id="resetPasswordBtn" class="account-action-btn account-action-secondary">Reset password</button>
+                                <button type="button" id="logoutBtn2">Logout</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <div id="footer"></div>
+
+
+    <!-- Common Header + Footer -->
+
+    <script
+        type="module"
+        src="../js/common.js"
+    ></script>
+
+
+    <!-- Account JS -->
+
+    <script
+        type="module"
+        src="./account.js"
+    ></script>
+
+</body>
+
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Confirmed — Nishat Fashion</title>
+
+    <meta
+        name="description"
+        content="Your Nishat Fashion order has been successfully placed."
+    >
+
+    <!-- GOOGLE FONT -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- ORDER SUCCESS CSS -->
+    <link
+        rel="stylesheet"
+        href="./success.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     COMMON HEADER
+===================================================== -->
+
+<div id="header"></div>
+
+
+<!-- =====================================================
+     ORDER SUCCESS
+===================================================== -->
+
+<main class="success-page">
+
+    <section class="success-section">
+
+        <div class="success-container">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <span class="success-label">
+                ORDER CONFIRMED
+            </span>
+
+
+            <h1>
+                Thank You For Your Order!
+            </h1>
+
+
+            <p class="success-description">
+                Your order has been successfully placed.
+                We will contact you shortly to confirm your order.
+            </p>
+
+
+            <!-- ORDER NUMBER -->
+
+            <div class="order-number-card">
+
+                <span>
+                    Order Number
+                </span>
+
+                <strong id="orderId">
+                    —
+                </strong>
+
+                <button
+                    type="button"
+                    id="copyOrderId"
+                    class="copy-order-btn"
+                    title="Copy Order ID"
+                >
+
+                    <i class="fa-regular fa-copy"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- ORDER STATUS -->
+
+            <div class="status-box">
+
+                <div class="status-icon">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        Order Status
+                    </strong>
+
+                    <span id="orderStatus">
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMER INFO -->
+
+            <div
+                class="success-card"
+                id="customerCard"
+            >
+
+                <div class="card-heading">
+
+                    <h2>
+                        Delivery Information
+                    </h2>
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <div class="customer-info">
+
+                    <div>
+
+                        <span>
+                            Name
+                        </span>
+
+                        <strong id="customerName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Phone
+                        </span>
+
+                        <strong id="customerPhone">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            District
+                        </span>
+
+                        <strong id="customerDistrict">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Thana / Area
+                        </span>
+
+                        <strong id="customerThana">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="full-width">
+
+                        <span>
+                            Address
+                        </span>
+
+                        <strong id="customerAddress">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div
+                class="success-card"
+                id="orderCard"
+            >
+
+                <div class="card-heading">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                </div>
+
+
+                <!-- ITEMS -->
+
+                <div
+                    class="success-items"
+                    id="orderItems"
+                ></div>
+
+
+                <!-- TOTALS -->
+
+                <div class="success-totals">
+
+                    <div>
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="subtotal">
+                            ৳0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Delivery Charge
+                        </span>
+
+                        <strong id="deliveryCharge">
+                            ৳0
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        id="discountRow"
+                        class="discount-row"
+                    >
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong id="discount">
+                            -৳0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="grandTotal">
+                            ৳0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div class="payment-info">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <div>
+
+                    <strong>
+                        Payment Method
+                    </strong>
+
+                    <span id="paymentMethod">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="success-actions">
+
+                <a
+                    href="../shop/index.html"
+                    class="success-btn primary"
+                >
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    Continue Shopping
+
+                </a>
+
+
+                <a
+                    href="../account/account.html"
+                    class="success-btn secondary"
+                >
+
+                    <i class="fa-regular fa-user"></i>
+
+                    View My Orders
+
+                </a>
+
+            </div>
+
+
+            <!-- SUPPORT -->
+
+            <p class="support-text">
+
+                Need help with your order?
+
+                <a href="../contact/index.html">
+                    Contact us
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="success-toast"
+    id="successToast"
+>
+
+    <i class="fa-solid fa-check"></i>
+
+    <span>
+        Copied
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     COMMON JS
+===================================================== -->
+
+<script
+    type="module"
+    src="../js/common.js"
+></script>
+
+
+<!-- =====================================================
+     ORDER SUCCESS JS
+===================================================== -->
+
+<script
+    type="module"
+    src="./success.js"
+></script>
+
+
+</body>
+
+</html>

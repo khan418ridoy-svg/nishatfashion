@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Product — Nishat Fashion</title>
+
+    <!-- MAIN SITE CSS -->
+
+
+    <!-- PRODUCT CSS -->
+    <link
+        rel="stylesheet"
+        href="./product.css"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PRODUCT PAGE
+===================================================== -->
+
+<main class="product-page">
+
+<div id="header"></div>
+
+    <!-- BREADCRUMB -->
+
+    <div class="container">
+
+        <div class="product-breadcrumb">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <a href="../shop/index.html">
+                Shop
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span id="breadcrumbProduct">
+                Product
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LOADING -->
+
+    <section
+        id="productLoading"
+        class="product-loading"
+    >
+
+        <div class="product-loader"></div>
+
+        <p>
+            Loading product...
+        </p>
+
+    </section>
+
+
+
+    <!-- PRODUCT -->
+
+    <section
+        id="productContent"
+        class="container product-main hidden"
+    >
+
+
+        <!-- =================================================
+             LEFT - GALLERY
+        ================================================== -->
+
+        <div class="product-gallery">
+
+
+            <div
+                class="thumbnail-list"
+                id="thumbnailList"
+            >
+            </div>
+
+
+            <div class="main-image-wrap">
+
+
+                <img
+                    id="mainProductImage"
+                    class="main-product-image"
+                    src="../asset/logo.png"
+                    alt="Product"
+                >
+
+
+                <span
+                    id="productDiscount"
+                    class="product-discount"
+                >
+                </span>
+
+
+                <button
+                    type="button"
+                    id="imageWishlist"
+                    class="image-wishlist"
+                    aria-label="Add to wishlist"
+                >
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT - DETAILS
+        ================================================== -->
+
+        <div class="product-details">
+
+
+            <div
+                id="productCollection"
+                class="product-collection"
+            >
+            </div>
+
+
+            <h1 id="productName">
+                Product Name
+            </h1>
+
+
+            <div class="product-rating-row">
+
+                <div
+                    id="productStars"
+                    class="product-stars"
+                >
+                    ☆☆☆☆☆
+                </div>
+
+                <span
+                    id="productRating"
+                    class="rating-number"
+                >
+                    0
+                </span>
+
+                <span
+                    id="productReviews"
+                    class="review-count"
+                >
+                    0 Reviews
+                </span>
+
+            </div>
+
+
+            <div class="product-price-row">
+
+                <strong
+                    id="productPrice"
+                    class="product-price"
+                >
+                    ৳0
+                </strong>
+
+                <del
+                    id="productOldPrice"
+                    class="product-old-price"
+                >
+                    ৳0
+                </del>
+
+            </div>
+
+
+            <div
+                id="productSave"
+                class="product-save"
+            >
+            </div>
+
+
+            <p
+                id="productDescription"
+                class="product-description"
+            >
+            </p>
+
+
+
+            <!-- COLOR -->
+
+            <div
+                id="colorSection"
+                class="option-section"
+            >
+
+                <div class="option-heading">
+
+                    <strong>
+                        Color
+                    </strong>
+
+                    <span>
+                        Selected:
+                        <b id="selectedColor">
+                            —
+                        </b>
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="colorOptions"
+                    class="color-options"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- SIZE -->
+
+            <div
+                id="sizeSection"
+                class="option-section"
+            >
+
+                <div class="option-heading">
+
+                    <strong>
+                        Size
+                    </strong>
+
+                    <span>
+                        Selected:
+                        <b id="selectedSize">
+                            —
+                        </b>
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="sizeOptions"
+                    class="size-options"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- STOCK -->
+
+            <div
+                id="stockStatus"
+                class="stock-status"
+            >
+            </div>
+
+
+
+            <!-- QUANTITY -->
+
+            <div class="quantity-section">
+
+                <strong>
+                    Quantity
+                </strong>
+
+
+                <div class="quantity-box">
+
+                    <button
+                        type="button"
+                        id="decreaseQty"
+                    >
+                        −
+                    </button>
+
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                        max="10"
+                        inputmode="numeric"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="increaseQty"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <small>
+                    Maximum 10 pieces per product
+                </small>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="product-actions">
+
+                <button
+                    type="button"
+                    id="addToCart"
+                    class="add-cart-btn"
+                >
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    Add to Cart
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="buyNow"
+                    class="buy-now-btn"
+                >
+                    Buy Now
+                </button>
+
+            </div>
+
+
+
+            <!-- FEATURES -->
+
+            <div class="product-features">
+
+
+                <div class="feature-item">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <div>
+
+                        <strong>
+                            Delivery Available
+                        </strong>
+
+                        <span>
+                            District-wise delivery charge
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    <div>
+
+                        <strong>
+                            Easy Support
+                        </strong>
+
+                        <span>
+                            Contact us for order support
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature-item">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+
+                        <strong>
+                            Secure Checkout
+                        </strong>
+
+                        <span>
+                            Cash on Delivery & bKash
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PRODUCT INFORMATION
+    ================================================== -->
+
+    <section
+        id="productInfoSection"
+        class="container product-information hidden"
+    >
+
+
+        <div class="info-tabs">
+
+            <button
+                type="button"
+                class="info-tab active"
+                data-tab="descriptionTab"
+            >
+                Description
+            </button>
+
+
+            <button
+                type="button"
+                class="info-tab"
+                data-tab="detailsTab"
+            >
+                Details
+            </button>
+
+
+            <button
+                type="button"
+                class="info-tab"
+                data-tab="shippingTab"
+            >
+                Shipping
+            </button>
+
+        </div>
+
+
+
+        <div
+            id="descriptionTab"
+            class="info-content active"
+        >
+
+            <p id="longDescription">
+            </p>
+
+        </div>
+
+
+
+        <div
+            id="detailsTab"
+            class="info-content"
+        >
+
+            <div class="details-grid">
+
+
+                <div>
+
+                    <span>
+                        Category
+                    </span>
+
+                    <strong id="detailCategory">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Collection
+                    </span>
+
+                    <strong id="detailCollection">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Brand
+                    </span>
+
+                    <strong id="detailBrand">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Fabric
+                    </span>
+
+                    <strong id="detailMaterial">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Fit
+                    </span>
+
+                    <strong id="detailFit">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        SKU
+                    </span>
+
+                    <strong id="detailSku">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            id="shippingTab"
+            class="info-content"
+        >
+
+            <p>
+                Delivery charge is calculated according to
+                your selected district during checkout.
+            </p>
+
+            <p>
+                Payment options: bKash and Cash on Delivery.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         CUSTOMER REVIEWS
+    ================================================== -->
+
+    <section
+        id="reviewsSection"
+        class="container product-reviews-section hidden"
+    >
+
+        <div class="reviews-heading">
+            <span>CUSTOMER FEEDBACK</span>
+            <h2>Reviews</h2>
+            <p>  </p>
+        </div>
+
+        <div id="reviewsList" class="reviews-list">
+            <div class="reviews-loading">Loading reviews...</div>
+        </div>
+
+        <div class="reviews-load-more-wrap">
+            <button
+                id="loadMoreReviews"
+                type="button"
+                class="load-more-reviews"
+            >
+                Load More Reviews
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PRODUCT VIDEO
+    ================================================== -->
+
+    <section
+        id="productVideoSection"
+        class="container product-video-section hidden"
+    >
+
+        <div class="section-heading">
+
+            <span>
+                PRODUCT VIDEO
+            </span>
+
+            <h2>
+                See the Product
+            </h2>
+
+        </div>
+
+
+        <video
+            id="productVideo"
+            controls
+            playsinline
+            preload="metadata"
+        >
+        </video>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ERROR
+    ================================================== -->
+
+    <section
+        id="productError"
+        class="product-error hidden"
+    >
+
+        <div>
+
+            <div class="error-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+
+            <h2>
+                Product Not Found
+            </h2>
+
+            <p>
+                This product is no longer available.
+            </p>
+
+            <a
+                href="../shop/index.html"
+                class="back-shop-btn"
+            >
+                Back to Shop
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="product-toast"
+>
+
+    <i class="fa-solid fa-check"></i>
+
+    <span>
+        Added to cart
+    </span>
+
+</div>
+
+<div id="footer"></div>
+<script
+    type="module"
+    src="../js/common.js"
+></script>
+<script
+    type="module"
+    src="./product.js"
+></script>
+
+
+</body>
+
+</html>

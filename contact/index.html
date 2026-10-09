@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Contact Us | Nishat Fashion</title>
+    <meta name="description" content="Contact Nishat Fashion for product enquiries, orders, delivery and customer support.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #171923;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-hero {
+            padding: 65px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #eef1f8, #ffffff);
+        }
+
+        .contact-hero .eyebrow {
+            display: inline-block;
+            padding: 6px 15px;
+            border: 1px solid #d8dfff;
+            border-radius: 30px;
+            color: #315cff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .contact-hero h1 {
+            margin: 16px 0 10px;
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.15;
+        }
+
+        .contact-hero p {
+            max-width: 620px;
+            margin: 0 auto;
+            color: #646b78;
+        }
+
+        .contact-container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 45px auto 70px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .contact-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 5px 18px rgba(20, 25, 40, 0.04);
+        }
+
+        .contact-card h2 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .muted {
+            color: #727987;
+            font-size: 14px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            flex: 0 0 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            background: #f0f2f7;
+            font-size: 20px;
+        }
+
+        .contact-info-item strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .contact-info-item p {
+            margin: 0;
+            color: #727987;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 17px;
+            margin-top: 22px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .field label {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            min-width: 0;
+            padding: 13px 14px;
+            border: 1px solid #dfe2e8;
+            border-radius: 11px;
+            background: #fff;
+            color: #171923;
+            font: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: #4263eb;
+            box-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+        }
+
+        .field textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 14px 20px;
+            background: #171923;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #30364a;
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .form-note {
+            margin: 0;
+            color: #777e8b;
+            font-size: 12px;
+        }
+
+        .contact-status {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #eef5ff;
+            color: #2147a5;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-status.show {
+            display: block;
+        }
+
+        .contact-status.error {
+            background: #fff0f0;
+            color: #a52323;
+        }
+
+        @media (max-width: 760px) {
+            .contact-hero {
+                padding: 45px 18px;
+            }
+
+            .contact-container {
+                margin: 25px auto 45px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .contact-card {
+                padding: 22px;
+                border-radius: 16px;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <section class="contact-hero">
+            <span class="eyebrow">WE'RE HERE TO HELP</span>
+            <h1>Contact Us</h1>
+            <p>
+                Have a question about an order, a product or delivery?
+                Send us a message and our team will assist you.
+            </p>
+        </section>
+
+        <section class="contact-container">
+            <div class="contact-grid">
+
+                <aside class="contact-card">
+                    <h2>Get in Touch</h2>
+                    <p class="muted">
+                        Choose the most suitable way to contact Nishat Fashion.
+                    </p>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">✉</div>
+                        <div>
+                            <strong>Email Support</strong>
+                            <p>Use the contact form to prepare an email to our team.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📦</div>
+                        <div>
+                            <strong>Order Support</strong>
+                            <p>
+                                Include your order number when asking about
+                                an existing order.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">🚚</div>
+                        <div>
+                            <strong>Delivery Questions</strong>
+                            <p>
+                                Contact us about delivery updates, address
+                                corrections or other order concerns.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <strong>Support Hours</strong>
+                            <p>Please check our official channels for current support hours.</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="contact-card">
+                    <h2>Send a Message</h2>
+                    <p class="muted">
+                        Fill in the details below. Your email application
+                        will open with the message prepared.
+                    </p>
+
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="contactName">Full Name *</label>
+                                <input
+                                    id="contactName"
+                                    name="name"
+                                    type="text"
+                                    maxlength="100"
+                                    autocomplete="name"
+                                    required
+                                >
+                            </div>
+
+                            <div class="field">
+                                <label for="contactEmail">Email Address *</label>
+                                <input
+                                    id="contactEmail"
+                                    name="email"
+                                    type="email"
+                                    maxlength="254"
+                                    autocomplete="email"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="contactSubject">Subject *</label>
+                                <select id="contactSubject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="Product enquiry">Product enquiry</option>
+                                    <option value="Order status">Order status</option>
+                                    <option value="Delivery issue">Delivery issue</option>
+                                    <option value="Payment issue">Payment issue</option>
+                                    <option value="Return or exchange">Return or exchange</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="contactOrder">Order Number (Optional)</label>
+                                <input
+                                    id="contactOrder"
+                                    name="orderNumber"
+                                    type="text"
+                                    maxlength="100"
+                                    autocomplete="off"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="contactMessage">Your Message *</label>
+                            <textarea
+                                id="contactMessage"
+                                name="message"
+                                minlength="10"
+                                maxlength="3000"
+                                placeholder="How can we help you?"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div id="contactStatus" class="contact-status" role="status"></div>
+
+                        <button class="submit-btn" id="contactSubmit" type="submit">
+                            Prepare Email →
+                        </button>
+
+                        <p class="form-note">
+                            This form opens your email application. It does not
+                            send or store messages automatically.
+                        </p>
+                    </form>
+                </section>
+
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/common.js"></script>
+
+    <script>
+        /*
+         * Replace this value with your official customer-support email
+         * before publishing the website.
+         */
+        const SUPPORT_EMAIL = "YOUR_OFFICIAL_SUPPORT_EMAIL@example.com";
+
+        const contactForm = document.getElementById("contactForm");
+        const contactStatus = document.getElementById("contactStatus");
+        const contactSubmit = document.getElementById("contactSubmit");
+
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!contactForm.reportValidity()) return;
+
+            if (
+                SUPPORT_EMAIL.includes("YOUR_OFFICIAL_SUPPORT_EMAIL") ||
+                !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(SUPPORT_EMAIL)
+            ) {
+                contactStatus.className = "contact-status show error";
+                contactStatus.textContent =
+                    "Please configure SUPPORT_EMAIL in contact/index.html with your official customer-support email.";
+                return;
+            }
+
+            const form = new FormData(contactForm);
+            const name = String(form.get("name") || "").trim();
+            const email = String(form.get("email") || "").trim();
+            const subject = String(form.get("subject") || "").trim();
+            const orderNumber = String(form.get("orderNumber") || "").trim();
+            const message = String(form.get("message") || "").trim();
+
+            const emailSubject = `[Nishat Fashion] ${subject}`;
+
+            const emailBody = [
+                `Name: ${name}`,
+                `Customer email: ${email}`,
+                `Subject: ${subject}`,
+                `Order number: ${orderNumber || "Not provided"}`,
+                "",
+                "Message:",
+                message
+            ].join("\n");
+
+            const mailto =
+                `mailto:${SUPPORT_EMAIL}` +
+                `?subject=${encodeURIComponent(emailSubject)}` +
+                `&body=${encodeURIComponent(emailBody)}`;
+
+            contactStatus.className = "contact-status show";
+            contactStatus.textContent =
+                "Your email application will open with the message prepared.";
+
+            contactSubmit.disabled = true;
+
+            window.location.href = mailto;
+
+            setTimeout(() => {
+                contactSubmit.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

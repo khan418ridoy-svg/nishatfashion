@@ -1,0 +1,1081 @@
+/* =========================================================
+   NISHAT FASHION
+   ORDER DETAILS
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.order-details-panel {
+    padding: 22px;
+    background: rgba(20, 20, 20, 0.82);
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.order-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   DETAIL CARD
+========================================================= */
+
+.detail-card {
+
+    padding: 20px;
+
+    border: 1px solid #303030;
+
+    border-radius: 14px;
+
+    background: #191919;
+}
+
+
+.detail-card-title {
+
+    margin-bottom: 15px;
+
+    color: #b8863b;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   CUSTOMER
+========================================================= */
+
+.customer-info,
+.address-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.customer-info strong,
+.address-info strong {
+
+    color: #fff;
+
+    font-size: 16px;
+
+}
+
+
+.customer-info span,
+.address-info span {
+
+    color: #999;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   ORDER INFO
+========================================================= */
+
+.info-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.info-list > div {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #292929;
+
+}
+
+
+.info-list > div:last-child {
+
+    padding-bottom: 0;
+
+    border-bottom: none;
+
+}
+
+
+.info-list span {
+
+    color: #888;
+
+    font-size: 13px;
+
+}
+
+
+.info-list strong {
+
+    color: #ddd;
+
+    font-size: 13px;
+
+    text-align: right;
+
+}
+
+
+.info-list .order-total {
+
+    color: #d7a24f;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-control {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.status-control label {
+
+    color: #999;
+
+    font-size: 13px;
+
+}
+
+
+.status-select {
+
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 12px;
+
+    border: 1px solid #444;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #202020;
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.status-select:focus {
+
+    border-color: #b8863b;
+
+}
+
+
+/* STATUS COLORS */
+
+.status-select.status-pending {
+
+    border-color: #80652c;
+
+    color: #e5b95d;
+
+}
+
+
+.status-select.status-confirmed {
+
+    border-color: #285b42;
+
+    color: #76d9a0;
+
+}
+
+
+.status-select.status-processing {
+
+    border-color: #385a80;
+
+    color: #79b9f2;
+
+}
+
+
+.status-select.status-packed {
+
+    border-color: #614d82;
+
+    color: #c19cf2;
+
+}
+
+
+.status-select.status-shipped {
+
+    border-color: #356c78;
+
+    color: #72d5e5;
+
+}
+
+
+.status-select.status-delivered {
+
+    border-color: #2d704b;
+
+    color: #7ee0a5;
+
+}
+
+
+.status-select.status-cancelled {
+
+    border-color: #713535;
+
+    color: #ff8585;
+
+}
+
+
+.status-select.status-returned {
+
+    border-color: #704a32;
+
+    color: #e8a16f;
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.save-status-btn {
+
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 4px;
+
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+.status-message {
+
+    min-height: 18px;
+
+    font-size: 12px;
+
+}
+
+
+.status-message.success {
+
+    color: #70dfa0;
+
+}
+
+
+.status-message.error {
+
+    color: #ff7777;
+
+}
+
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.items-section {
+
+    padding-top: 5px;
+
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.section-heading h2 {
+
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 19px;
+
+}
+
+
+.section-heading > span {
+
+    color: #888;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   ITEM LIST
+========================================================= */
+
+.items-list {
+
+    border: 1px solid #303030;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background: #191919;
+
+}
+
+
+.order-item {
+
+    display: grid;
+
+    grid-template-columns:
+        35px
+        70px
+        minmax(180px, 1fr)
+        90px
+        120px;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #292929;
+
+}
+
+
+.order-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.item-number {
+
+    color: #666;
+
+    font-size: 12px;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   ITEM IMAGE
+========================================================= */
+
+.item-image {
+
+    width: 70px;
+
+    height: 70px;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: #242424;
+
+}
+
+
+.item-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+}
+
+
+.no-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #777;
+
+    font-size: 10px;
+
+    text-align: center;
+
+}
+
+
+/* =========================================================
+   ITEM INFO
+========================================================= */
+
+.item-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    min-width: 0;
+
+}
+
+
+.item-info strong {
+
+    color: #fff;
+
+    font-size: 14px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+.item-info span {
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+.item-qty {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+}
+
+
+.item-price {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    color: #d7a24f;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-align: right;
+
+}
+
+
+.item-price small {
+
+    color: #777;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-items {
+
+    padding: 45px 20px;
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+.empty-state {
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+}
+
+
+.empty-state h2 {
+
+    margin: 0 0 8px;
+
+    color: #fff;
+
+    font-size: 20px;
+
+}
+
+
+.empty-state p {
+
+    margin: 0 0 20px;
+
+    color: #888;
+
+}
+
+
+.error-text {
+
+    color: #ff7777 !important;
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border: 1px solid #444;
+
+    border-radius: 9px;
+
+    background: #242424;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        background .18s ease,
+        transform .18s ease;
+
+}
+
+
+.back-btn:hover {
+
+    background: #303030;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-inline {
+
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #888;
+
+}
+
+
+.spinner {
+
+    display: inline-block;
+
+    width: 18px;
+
+    height: 18px;
+
+    border: 2px solid rgba(255,255,255,.18);
+
+    border-top-color: #fff;
+
+    border-radius: 50%;
+
+    animation:
+        orderDetailsSpin .65s linear infinite;
+
+}
+
+
+.spinner.large {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-width: 3px;
+
+    margin-bottom: 10px;
+
+}
+
+
+@keyframes orderDetailsSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   CLICK LOADING
+========================================================= */
+
+.click-loading {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0,0,0,.18);
+
+    backdrop-filter: blur(1px);
+
+}
+
+
+.click-loading.hidden {
+
+    display: none;
+
+}
+
+
+.click-loading-box {
+
+    min-width: 180px;
+
+    padding: 20px;
+
+    border: 1px solid #353535;
+
+    border-radius: 14px;
+
+    background: rgba(20,20,20,.96);
+
+    color: #fff;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45);
+
+}
+
+
+.click-loading-box p {
+
+    margin: 0;
+
+    color: #bbb;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    z-index: 100000;
+
+    min-width: 220px;
+
+    max-width: calc(100vw - 30px);
+
+    padding: 13px 17px;
+
+    border: 1px solid #333;
+
+    border-radius: 10px;
+
+    background: #202020;
+
+    color: #fff;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.4);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translate(-50%, 15px);
+
+    transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .2s ease;
+
+}
+
+
+.toast.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+.toast.success {
+
+    border-color: #315d45;
+
+}
+
+
+.toast.error {
+
+    border-color: #713535;
+
+    color: #ff9090;
+
+}
+
+
+/* =========================================================
+   BUTTON LOADING
+========================================================= */
+
+button.is-loading {
+
+    pointer-events: none !important;
+
+    cursor: wait !important;
+
+    opacity: .7;
+
+}
+
+
+button.is-loading::after {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 14px;
+
+    height: 14px;
+
+    margin-left: 8px;
+
+    vertical-align: -2px;
+
+    border: 2px solid currentColor;
+
+    border-right-color: transparent;
+
+    border-radius: 50%;
+
+    animation:
+        orderDetailsSpin .65s linear infinite;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .order-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .order-item {
+
+        grid-template-columns:
+            30px
+            60px
+            minmax(150px, 1fr)
+            70px;
+
+    }
+
+
+    .item-image {
+
+        width: 60px;
+
+        height: 60px;
+
+    }
+
+
+    .item-price {
+
+        grid-column: 3 / -1;
+
+        text-align: left;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .order-details-panel {
+
+        padding: 14px;
+
+    }
+
+
+    .detail-card {
+
+        padding: 16px;
+
+    }
+
+
+    .order-item {
+
+        grid-template-columns:
+            25px
+            55px
+            minmax(0, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .item-image {
+
+        width: 55px;
+
+        height: 55px;
+
+    }
+
+
+    .item-qty {
+
+        grid-column: 3;
+
+        font-size: 12px;
+
+    }
+
+
+    .item-price {
+
+        grid-column: 3;
+
+        text-align: left;
+
+    }
+
+
+    .section-heading {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .page-top .back-btn {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .order-details-panel {
+
+        padding: 10px;
+
+    }
+
+
+    .detail-card {
+
+        padding: 14px;
+
+    }
+
+
+    .info-list > div {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 4px;
+
+    }
+
+
+    .info-list strong {
+
+        text-align: left;
+
+    }
+
+}

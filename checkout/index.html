@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Nishat Fashion</title>
+
+<link rel="stylesheet" href="./checkout.css">
+</head>
+
+<body>
+
+    <!-- ================= COMMON HEADER ================= -->
+    <div id="header"></div>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="checkout-page">
+
+        <div class="checkout-container">
+
+            <!-- PAGE TITLE -->
+
+            <div class="checkout-title">
+
+                <div>
+                    <span class="checkout-label">
+                        NISHAT FASHION
+                    </span>
+
+                    <h1>Checkout</h1>
+
+                    <p>
+                        Complete your information to place your order.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- ================= CHECKOUT GRID ================= -->
+
+            <div class="checkout-grid">
+
+
+                <!-- ================= LEFT ================= -->
+
+                <section class="checkout-left">
+
+
+                    <!-- CUSTOMER INFORMATION -->
+
+                    <div class="checkout-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-number">
+                                01
+                            </div>
+
+                            <div>
+                                <h2>Delivery Information</h2>
+
+                                <p>
+                                    Where should we deliver your order?
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <!-- NAME -->
+
+                            <div class="form-group full">
+
+                                <label for="customerName">
+                                    Full Name
+                                    <span>*</span>
+                                </label>
+
+                                <input type="text" id="customerName" placeholder="Enter your full name"
+                                    autocomplete="name">
+
+                                <small class="error-message"></small>
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div class="form-group">
+
+                                <label for="phone">
+                                    Phone Number
+                                    <span>*</span>
+                                </label>
+
+                                <input type="tel" id="phone" placeholder="01XXXXXXXXX" maxlength="11"
+                                    autocomplete="tel">
+
+                                <small class="error-message"></small>
+
+                            </div>
+
+
+                            <!-- DISTRICT -->
+
+                            <div class="form-group">
+
+                                <label for="district">
+                                    District
+                                    <span>*</span>
+                                </label>
+
+                                <select id="district">
+
+                                    <option value="">
+                                        Select District
+                                    </option>
+
+                                </select>
+
+                                <small class="error-message"></small>
+
+                            </div>
+                            <!-- THANA / UPAZILA -->
+
+                            <div class="form-group">
+
+                                <label for="thana">
+                                    Thana / Upazila
+                                    <span>*</span>
+                                </label>
+
+                                <select id="thana" disabled>
+
+                                    <option value="">
+                                        Select District First
+                                    </option>
+
+                                </select>
+
+                                <small class="error-message"></small>
+
+                            </div>
+
+                            <!-- ADDRESS -->
+
+                            <div class="form-group full">
+
+                                <label for="address">
+                                    Full Address
+                                    <span>*</span>
+                                </label>
+
+                                <textarea id="address" rows="4" placeholder="House/Road/Village/Area..."></textarea>
+
+                                <small class="error-message"></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="checkout-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-number">
+                                02
+                            </div>
+
+                            <div>
+                                <h2>Payment Method</h2>
+
+                                <p>
+                                    Select your preferred payment method.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="payment-methods">
+
+
+                            <!-- BKASH -->
+
+                            <label class="payment-option">
+
+                                <input type="radio" name="paymentMethod" value="bkash" checked>
+
+                                <div class="payment-content">
+
+                                    <div class="payment-icon bkash-icon">
+                                        ৳
+                                    </div>
+
+                                    <div class="payment-info">
+
+                                        <strong>
+                                            bKash
+                                        </strong>
+
+                                        <span>
+                                            Pay securely with bKash
+                                        </span>
+
+                                    </div>
+
+                                    <div class="payment-check">
+                                        ✓
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+
+                            <!-- COD -->
+
+                            <label class="payment-option">
+
+                                <input type="radio" name="paymentMethod" value="cod">
+
+                                <div class="payment-content">
+
+                                    <div class="payment-icon cod-icon">
+                                        💵
+                                    </div>
+
+                                    <div class="payment-info">
+
+                                        <strong>
+                                            Cash on Delivery
+                                        </strong>
+
+                                        <span>
+                                            Pay when your order arrives
+                                        </span>
+
+                                    </div>
+
+                                    <div class="payment-check">
+                                        ✓
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                        <div id="bkashDiscountInfo" class="payment-note">
+                            <span>✓</span>
+
+                            <div>
+                                <strong>bKash discount applied</strong>
+
+                                <p>
+                                    Get 2.5% discount, maximum ৳50.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTE -->
+
+                    <div class="checkout-note">
+
+                        <span>🛡️</span>
+
+                        <p>
+                            Your order information is securely processed.
+                            Payment verification will be completed by our
+                            secure payment system.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= RIGHT ================= -->
+
+                <aside class="checkout-right">
+
+                    <div class="summary-card">
+
+                        <div class="summary-header">
+
+                            <div>
+
+                                <span>
+                                    ORDER SUMMARY
+                                </span>
+
+                                <h2>
+                                    Your Order
+                                </h2>
+
+                            </div>
+
+                            <span id="itemCount" class="item-count">
+                                0 Items
+                            </span>
+
+                        </div>
+
+
+                        <!-- CART ITEMS -->
+
+                        <div id="checkoutItems" class="checkout-items">
+                            <!-- JS -->
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="price-summary">
+
+                            <div class="price-row">
+
+                                <span>
+                                    Subtotal
+                                </span>
+
+                                <strong id="subtotal">
+                                    ৳0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="price-row">
+
+                                <span>
+                                    Delivery
+                                </span>
+
+                                <strong id="deliveryCharge">
+                                    ৳0
+                                </strong>
+
+                            </div>
+
+
+                            <div id="discountRow" class="price-row discount-row hidden">
+
+                                <span>
+                                    bKash Discount
+                                </span>
+
+                                <strong id="discount">
+                                    -৳0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-divider"></div>
+
+
+                            <div class="total-row">
+
+                                <span>
+                                    Total
+                                </span>
+
+                                <strong id="grandTotal">
+                                    ৳0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PLACE ORDER -->
+
+                        <button id="placeOrderBtn" class="place-order-btn">
+
+                            <span>
+                                Place Order
+                            </span>
+
+                            <span>
+                                →
+                            </span>
+
+                        </button>
+
+
+                        <div class="secure-payment">
+
+                            🔒 Secure & Protected Checkout
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DELIVERY INFO -->
+
+                    <div class="delivery-info-card">
+
+                        <div class="delivery-info-icon">
+                            🚚
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Delivery Information
+                            </strong>
+
+                            <p>
+                                Delivery charge depends on your
+                                selected district.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= LOADING ================= -->
+
+    <div id="checkoutLoading" class="checkout-loading hidden">
+
+        <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <p>
+                Processing your order...
+            </p>
+
+        </div>
+
+    </div>
+    <!-- ================= COMMON FOOTER ================= -->
+    <div id="footer"></div>
+
+    <!-- ================= COMMON LAYOUT ================= -->
+    <script type="module" src="../js/common.js"></script>
+
+    <!-- ================= CHECKOUT ================= -->
+    <script type="module" src="../checkout/checkout.js"></script>
+</body>
+
+</html>

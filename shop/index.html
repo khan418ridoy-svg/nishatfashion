@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shop — Nishat Fashion</title>
+
+    <meta
+        name="description"
+        content="Shop premium garments from Nishat Fashion."
+    >
+
+    <!-- SHOP CSS ONLY -->
+    <link
+        rel="stylesheet"
+        href="./shop.css"
+    >
+
+    <!-- GOOGLE FONT -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+     Loaded by common.js
+===================================================== -->
+
+<div id="header"></div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <!-- SHOP HERO -->
+
+    <section class="shop-hero">
+
+        <div class="container">
+
+            <span class="section-label">
+                NISHAT FASHION
+            </span>
+
+            <h1>
+                Shop Collection
+            </h1>
+
+            <p>
+                Discover premium garments designed for
+                comfort, confidence and everyday style.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SHOP SECTION -->
+
+    <section class="shop-section">
+
+        <div class="container">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="breadcrumb">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span>
+                    Shop
+                </span>
+
+            </div>
+
+
+            <!-- TOOLBAR -->
+
+            <div class="shop-toolbar">
+
+                <button
+                    class="filter-mobile-btn"
+                    id="filterMobileBtn"
+                >
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                    Filters
+
+                </button>
+
+
+                <div class="result-count">
+
+                    <span id="resultCount">
+                        0
+                    </span>
+
+                    Products
+
+                </div>
+
+
+                <div class="sort-box">
+
+                    <label for="sortProducts">
+                        Sort:
+                    </label>
+
+                    <select id="sortProducts">
+
+                        <option value="default">
+                            Featured
+                        </option>
+
+                        <option value="newest">
+                            Newest
+                        </option>
+
+                        <option value="price-low">
+                            Price: Low to High
+                        </option>
+
+                        <option value="price-high">
+                            Price: High to Low
+                        </option>
+
+                        <option value="discount">
+                            Biggest Discount
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- ACTIVE FILTERS BAR -->
+
+            <div
+                class="active-filters-bar"
+                id="activeFiltersBar"
+            ></div>
+            <!-- SHOP LAYOUT -->
+
+            <div class="shop-layout">
+
+
+                <!-- FILTER SIDEBAR -->
+
+                <aside
+                    class="filter-sidebar"
+                    id="filterSidebar"
+                >
+
+                    <div class="filter-header">
+
+                        <h2>
+                            Filters
+                        </h2>
+
+                        <button
+                            id="closeFilters"
+                            aria-label="Close filters"
+                        >
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="filter-group">
+
+                        <h3>
+                            Categories
+                        </h3>
+
+                        <div
+                            id="categoryFilters"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="filter-group">
+
+                        <h3>
+                            Price
+                        </h3>
+
+                        <div class="price-inputs">
+
+                            <input
+                                type="number"
+                                id="minPrice"
+                                placeholder="Min"
+                                min="0"
+                            >
+
+                            <span>—</span>
+
+                            <input
+                                type="number"
+                                id="maxPrice"
+                                placeholder="Max"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <button
+                            class="apply-price"
+                            id="applyPrice"
+                        >
+                            Apply
+                        </button>
+
+                    </div>
+
+
+                    <!-- DISCOUNT -->
+
+                    <div class="filter-group">
+
+                        <h3>
+                            Discount
+                        </h3>
+
+
+                        <label class="check-item">
+
+                            <input
+                                type="checkbox"
+                                value="10"
+                                class="discount-filter"
+                            >
+
+                            <span>
+                                10% or more
+                            </span>
+
+                        </label>
+
+
+                        <label class="check-item">
+
+                            <input
+                                type="checkbox"
+                                value="20"
+                                class="discount-filter"
+                            >
+
+                            <span>
+                                20% or more
+                            </span>
+
+                        </label>
+
+
+                        <label class="check-item">
+
+                            <input
+                                type="checkbox"
+                                value="30"
+                                class="discount-filter"
+                            >
+
+                            <span>
+                                30% or more
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <button
+                        class="clear-filters"
+                        id="clearFilters"
+                    >
+                        Clear All Filters
+                    </button>
+
+                </aside>
+
+
+                <!-- PRODUCTS -->
+
+                <div class="shop-products">
+
+
+                    <!-- LOADING -->
+
+                    <div
+                        class="products-loading"
+                        id="productsLoading"
+                    >
+
+                        <div class="loading-spinner"></div>
+
+                        <span>
+                            Loading products...
+                        </span>
+
+                    </div>
+
+
+                    <!-- PRODUCT GRID -->
+
+                    <div
+                        class="product-grid"
+                        id="shopProducts"
+                    ></div>
+
+
+                    <!-- EMPTY -->
+
+                    <div
+                        class="empty-products"
+                        id="emptyProducts"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i class="fa-solid fa-shirt"></i>
+
+                        </div>
+
+                        <h2>
+                            No Products Found
+                        </h2>
+
+                        <p>
+                            Try changing your filters or search.
+                        </p>
+
+                        <button
+                            class="btn btn-dark"
+                            id="emptyClearBtn"
+                        >
+                            Clear Filters
+                        </button>
+
+                    </div>
+
+
+                    <!-- PAGINATION -->
+
+                    <div
+                        class="pagination"
+                        id="pagination"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+     Loaded by common.js
+===================================================== -->
+
+<div id="footer"></div>
+
+
+<!-- =====================================================
+     COMMON JS
+===================================================== -->
+
+<script
+    type="module"
+    src="../js/common.js"
+></script>
+
+
+<!-- =====================================================
+     SHOP JS
+===================================================== -->
+
+<script
+    type="module"
+    src="./shop.js"
+></script>
+
+
+</body>
+
+</html>

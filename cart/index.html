@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shopping Cart — Nishat Fashion</title>
+
+    <meta
+        name="description"
+        content="View your shopping cart at Nishat Fashion."
+    >
+
+    <!-- CART CSS -->
+    <link
+        rel="stylesheet"
+        href="./cart.css"
+    >
+
+    <!-- GOOGLE FONT -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     COMMON HEADER
+===================================================== -->
+
+<div id="header"></div>
+
+
+<!-- =====================================================
+     MAIN CART
+===================================================== -->
+
+<main class="cart-page">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="cart-hero">
+
+        <div class="container">
+
+            <span class="cart-eyebrow">
+                SHOPPING BAG
+            </span>
+
+            <h1>
+                Your Cart
+            </h1>
+
+            <p>
+                Review your selected products before checkout.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CART SECTION
+    ================================================== -->
+
+    <section class="cart-section">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 EMPTY CART
+            ================================================== -->
+
+            <div
+                class="cart-empty"
+                id="emptyCart"
+                hidden
+            >
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                </div>
+
+                <h2>
+                    Your cart is empty
+                </h2>
+
+                <p>
+                    Looks like you haven't added anything to your cart yet.
+                </p>
+
+                <a
+                    href="../shop/index.html"
+                    class="cart-btn primary-btn"
+                >
+
+                    Continue Shopping
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- =================================================
+                 CART CONTENT
+            ================================================== -->
+
+            <div
+                class="cart-layout"
+                id="cartContent"
+            >
+
+
+                <!-- =================================================
+                     CART ITEMS
+                ================================================== -->
+
+                <div class="cart-main">
+
+
+                    <!-- TOP BAR -->
+
+                    <div class="cart-topbar">
+
+                        <label class="select-all">
+
+                            <input
+                                type="checkbox"
+                                id="selectAll"
+                            >
+
+                            <span>
+                                Select All
+                            </span>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            id="removeSelected"
+                            class="remove-selected"
+                        >
+
+                            <i class="fa-regular fa-trash-can"></i>
+
+                            Remove Selected
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ITEMS -->
+
+                    <div
+                        class="cart-items"
+                        id="cartItems"
+                    ></div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ORDER SUMMARY
+                ================================================== -->
+
+                <aside class="cart-summary">
+
+                    <div class="summary-card">
+
+                        <h2>
+                            Order Summary
+                        </h2>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Selected Items
+                            </span>
+
+                            <strong id="selectedCount">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong id="cartSubtotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-divider"></div>
+
+
+                        <div class="summary-total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong id="cartTotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="checkoutBtn"
+                            class="checkout-btn"
+                            disabled
+                        >
+
+                            Proceed to Checkout
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                        <a
+                            href="../shop/index.html"
+                            class="continue-shopping"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Continue Shopping
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         BENEFITS
+                    ================================================== -->
+
+                    <div class="cart-benefits">
+
+                        <div class="cart-benefit">
+
+                            <i class="fa-solid fa-truck-fast"></i>
+
+                            <div>
+
+                                <strong>
+                                    Fast Delivery
+                                </strong>
+
+                                <span>
+                                    All over Bangladesh
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="cart-benefit">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            <div>
+
+                                <strong>
+                                    Secure Payment
+                                </strong>
+
+                                <span>
+                                    Safe & trusted checkout
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="cart-benefit">
+
+                            <i class="fa-solid fa-rotate-left"></i>
+
+                            <div>
+
+                                <strong>
+                                    Easy Returns
+                                </strong>
+
+                                <span>
+                                    Hassle-free returns
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span>
+        Updated successfully
+    </span>
+
+</div>
+<div id="footer"></div>
+
+
+<!-- =====================================================
+     COMMON JS
+===================================================== -->
+
+<script
+    type="module"
+    src="../js/common.js"
+></script>
+
+
+<!-- =====================================================
+     CART JS
+===================================================== -->
+
+<script
+    type="module"
+    src="./cart.js"
+></script>
+
+
+</body>
+
+</html>

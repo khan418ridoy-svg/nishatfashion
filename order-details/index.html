@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Details - Nishat Fashion</title>
+
+    
+
+    <link
+        rel="stylesheet"
+        href="./order-details.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+    <div id="header"></div>
+
+
+    <main class="order-details-page">
+
+        <div class="order-details-container">
+
+
+            <!-- ==================================================
+                 PAGE HEADER
+                 ================================================== -->
+
+            <div class="order-page-header">
+
+                <div>
+
+                    <div class="order-breadcrumb">
+                        My Account / My Orders
+                    </div>
+
+                    <h1>
+                        Order Details
+                    </h1>
+
+                    <p id="orderDate">
+                        Loading order...
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="../account/account.html"
+                    class="back-account-btn"
+                >
+                    ← My Account
+                </a>
+
+            </div>
+
+
+            <!-- ==================================================
+                 LOADING
+                 ================================================== -->
+
+            <div
+                id="orderLoading"
+                class="order-loading"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <p>
+                    Loading order...
+                </p>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ERROR
+                 ================================================== -->
+
+            <div
+                id="orderError"
+                class="order-error"
+                hidden
+            >
+
+                <div class="error-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Order not found
+                </h2>
+
+                <p id="orderErrorText">
+                    We could not load this order.
+                </p>
+
+                <a
+                    href="../account/account.html"
+                    class="primary-btn"
+                >
+                    Back to My Account
+                </a>
+
+            </div>
+
+
+            <!-- ==================================================
+                 MAIN ORDER
+                 ================================================== -->
+
+            <div
+                id="orderContent"
+                class="order-content"
+                hidden
+            >
+
+
+                <!-- ==================================================
+                     ORDER SUMMARY
+                     ================================================== -->
+
+                <section class="order-summary-card">
+
+                    <div class="summary-top">
+
+                        <div>
+
+                            <span class="summary-label">
+                                Order ID
+                            </span>
+
+                            <strong
+                                id="orderId"
+                                class="order-id-large"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            id="orderStatus"
+                            class="order-status-large"
+                        >
+                            Pending
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-grid">
+
+                        <div class="summary-item">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong id="orderSubtotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <strong id="orderDelivery">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item">
+
+                            <span>
+                                Discount
+                            </span>
+
+                            <strong id="orderDiscount">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-item total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong id="orderTotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="orderActions"
+                        class="order-actions"
+                    ></div>
+
+                </section>
+
+
+                <!-- ==================================================
+                     PRODUCTS
+                     ================================================== -->
+
+                <section class="products-section">
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+                                Products
+                            </h2>
+
+                            <p>
+                                Review your purchased products.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="reviewSelectedBtn"
+                            class="review-selected-btn"
+                            hidden
+                        >
+                            Review Selected
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="productsList"
+                        class="products-list"
+                    ></div>
+
+                </section>
+
+                <section class="existing-reviews-section">
+                    <div class="section-header">
+                        <div>
+                            <h2>My Reviews</h2>
+                            <p>Edit or delete reviews you have submitted.</p>
+                        </div>
+                    </div>
+                    <div id="existingReviewsList" class="existing-reviews-list"></div>
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==========================================================
+         REVIEW MODAL
+         ========================================================== -->
+
+    <div
+        id="reviewModal"
+        class="review-modal"
+        hidden
+    >
+
+        <div
+            class="review-overlay"
+            id="reviewOverlay"
+        ></div>
+
+
+        <div
+            class="review-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reviewModalTitle"
+        >
+
+            <div class="review-dialog-header">
+
+                <div>
+
+                    <span class="modal-small-title">
+                        Product Review
+                    </span>
+
+                    <h2 id="reviewModalTitle">
+                        Write a Review
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="closeReviewModal"
+                    class="modal-close-btn"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="reviewForms"
+                class="review-forms"
+            ></div>
+
+
+            <div
+                id="reviewSubmitStatus"
+                class="review-submit-status"
+            ></div>
+
+
+            <div class="review-dialog-footer">
+
+                <button
+                    type="button"
+                    id="cancelReviewBtn"
+                    class="secondary-btn"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="button"
+                    id="submitReviewsBtn"
+                    class="primary-btn"
+                >
+                    Submit Review
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================================
+         COMMON
+         ========================================================== -->
+
+    <div id="footer"></div>
+
+
+    <script
+        type="module"
+        src="../js/common.js"
+    ></script>
+
+
+    <script
+        type="module"
+        src="./order-details.js"
+    ></script>
+
+</body>
+
+</html>
